@@ -1,0 +1,36 @@
+{% extends "sfapp/flask/base-full.html" %}
+
+{% block title %}State of the Union Generator - Sunlight Foundation{% endblock %}
+
+{% block css %}
+    <style>
+        .the-speech {
+            background-color: #fff;
+            border: 1px solid #999;
+            padding: 1em;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <h1>State of the Union Generator</h1>
+    <div class="row">
+        <div class="col-sm-4">
+            <form role="form">
+                <div class="form-group">
+                    <label for="">Barack Obama</label>
+                    <input type="range" class="form-control" min="0" max="5" name="" id="">
+                </div>
+                <div class="form-group">
+                    <label for="">George W. Bush</label>
+                    <input type="range" class="form-control" min="0" max="5" name="" id="">
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-8">
+            <div class="the-speech">
+                asdf
+            </div>
+        </div>
+    </div>
+{% endblock %}
