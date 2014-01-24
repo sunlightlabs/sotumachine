@@ -26,20 +26,28 @@ body {
     margin-top: 25px;
 }
 
+a:hover {
+    cursor: pointer;
+}
 
 /* Sidebar */
 
 #sidebar {
     height: 100%;
     background: #363a3d;
-    color: #ccc;
     width: 300px;
     position: fixed;
     z-index: 1;
-    /*overflow: hidden;*/
+    overflow: hidden;
+    overflow-x: hidden;
     overflow-y: scroll;
+    font-size: 1.25em;
+    line-height: 1.5em;
+    color: #ddd;    
 }
-
+#sidebar::-webkit-scrollbar {
+    display: none;
+}
 .sidebar-wrapper {
     width: 601px;
     position: relative;
@@ -60,9 +68,6 @@ body {
 .splash {
     width: 301px;
     border-right: 1px dashed #999;
-    font-size: 1.25em;
-    line-height: 1.5em;
-    color: #ddd;
 }
 
 .sotu-logo {
@@ -70,14 +75,12 @@ body {
 }
 
 .splash .info {
-    padding: 1em 0;
+    padding: 1.25em 0;
     margin: 2em 0 1em;
     border-top: 4px double #222;
     border-bottom: 4px double #222;
 }
-.settings form {
-    padding-top: 2em;
-}
+
 /* here lies buttons */
 
 .btn,
@@ -88,7 +91,7 @@ body {
     padding: 10px;           
     border: 0;
     border-radius: 3px;
-    height: 35px;
+    height: 38px;
     font-family: "proxima-nova-condensed", sans;
     text-transform: uppercase;
     color: #fff;
@@ -129,18 +132,31 @@ body {
 }
 
 
-/* fancy schmancy range sliders */
+/* form and fancy schmancy range sliders */
 
-form label {
+.settings form {
+    padding-top: 2em;
+}
+.settings form .settings-title {
+    color: #fff;
+    text-transform: uppercase;
+    border-bottom: 1px dashed #666;
+    width: 100%;
+    display: block;
+    padding: 10px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.settings form label {
     font-family: "proxima-nova-condensed",sans-serif;
     font-weight: 400;
     text-transform: uppercase;
-    font-size: .9em;
+    font-size: .75em;
     color: #ccc;
 }
 
 .form-group {
-    margin-bottom: 25px;
 }
 
 input[type="range"]{
@@ -153,7 +169,7 @@ input[type="range"]{
         linear,
         left top,
         right top,
-        color-stop(0.3, #5bc0de),
+        color-stop(0.3, #c9a706),
         color-stop(0.3, #222)
     );
     border-radius: 0;
@@ -232,6 +248,13 @@ footer {
     bottom: 0;
     background: rgba(255,255,255,0.75);
     border-color: #eee;
+    transition: background 200ms ease-out;
+}
+footer:hover {
+    background: rgba(255,255,255,1);    
+}
+.footer-link {
+    padding: 0 10px;
 }
 
 

@@ -41,7 +41,7 @@ $(function (){
             
             $(e).css('background-image',
                         '-webkit-gradient(linear, left top, right top, '
-                        + 'color-stop(' + val + ', #5bc0de), '
+                        + 'color-stop(' + val + ', #c9a706), '
                         + 'color-stop(' + val + ', #222)'
                         + ')'
                         );
@@ -67,5 +67,16 @@ $(function (){
     $btnback.on('click', function() {
         $wrapper.toggleClass('active');
         $btnback.toggleClass('hidden');
-    });    
+    });
+
+    // permalink popover
+    function geturl(){
+        return '<span class="permalink">'+ window.location.href +'</span>';
+    } 
+
+    $('#permalink').popover({
+        placement: 'top',
+        html: true,
+        content: geturl()
+    });
 });
