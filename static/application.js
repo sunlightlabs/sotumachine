@@ -37,11 +37,13 @@ $(function (){
         
     function fillSlider(e) {
             var val = ($(e).val() - $(e).attr('min')) / ($(e).attr('max') - $(e).attr('min'));
-            
+            var fillColor = '#c9a706';
+            var baseColor = '#333';
+
             $(e).css('background-image',
                         '-webkit-gradient(linear, left top, right top, '
-                        + 'color-stop(' + val + ', #c9a706), '
-                        + 'color-stop(' + val + ', #222)'
+                        + 'color-stop(' + val + ',' + fillColor + '),' 
+                        + 'color-stop(' + val + ',' + baseColor + ')'
                         + ')'
                         );
     }
@@ -78,4 +80,14 @@ $(function (){
         html: true,
         content: geturl()
     });
+
+    // set width for fixed footer correctly, with window resize
+    var $footer = $('footer');
+
+    function updateFooterWidth() {
+        $footer.css('max-width', $(this).width() - 300);
+    }
+    $(window).on('resize', updateFooterWidth);
+    updateFooterWidth();
+
 });
