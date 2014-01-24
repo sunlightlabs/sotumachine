@@ -258,25 +258,29 @@ footer:hover {
     background: rgba(255,255,255,1);    
 }
 
-footer .left .footer-link {
-    float: left;
+footer .left, footer .right{
+    /*overflow: auto;*/
 }
-
-footer .right .footer-link {
-    float: right;
+footer .left {
+    border-bottom: 1px dashed #ddd;
+    margin-bottom: 10px;
 }
 
 .footer-link {
-    margin: 0 10px;
+    float: left;
+    margin: 5px 10px;
+    width: 100%;
 }
 
-a.footer-link {
+.footer-link a {
     padding-bottom: 3px;
+    text-decoration: none;
     transition: color 150ms ease-out;
 }
 
-a.footer-link:hover {
+.footer-link a:hover {
     cursor: pointer;
+    border-bottom: 1px dotted #827b78;
 }
 
 
