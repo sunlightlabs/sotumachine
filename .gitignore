@@ -1,4 +1,7 @@
-lib/SOTU/sotu/text/*
+.DS_Store
+.env
 sotu.tar.gz
 *.pyc
 *.pyo
+dist/
+lib/SOTU/sotu/text/*
