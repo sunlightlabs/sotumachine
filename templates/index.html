@@ -1,180 +1,131 @@
-{% extends "sfapp/flask/base-full.html" %}
+{% extends "sfapp/flask/base-fluid.html" %}
 
 {% block title %}State of the Union Machine - Sunlight Foundation{% endblock %}
 
-{% block css %}
-    <style>
-        body {
-            background: #fff;
-            font-family: "proxima-nova-condensed", sans-serif;
-        }
-        .sf-header {
-            margin-bottom: 0;
-        }
-        .container {
-            padding: 0;
-            margin: 0;
-        }
-        footer {display: none;}
-        .the-speech {
-            background-color: #fff;
-            padding: 1em;
-        }
-        aside.col-sm-4 {
-            height: 100%;
-            padding: 25px;
-            padding-left: 25px;
-            padding-right: 25px;
-            background: #829199;
-            color: #ccc;
-            max-width: 300px;
-        }
-        input[type="range"]{
-            -webkit-appearance: none;
-            -moz-apperance: none;
-            border-radius: 6px;
-            height: 5px;
-            padding: 0;
-            background-image: -webkit-gradient(
-                linear,
-                left top,
-                right top,
-                color-stop(0.3, #ffdf40),
-                color-stop(0.3, #222)
-            );
-            border-radius: 0;
-            border: 0;
-        }
-        input[type='range']::-webkit-slider-thumb {
-            -webkit-appearance: none !important;
-            background-color: #fff;
-            height: 13px;
-            width: 6px;
-            cursor: pointer;
-        }        
-        form label {
-            font-family: "proxima-nova-condensed",sans-serif;
-            font-weight: 400;
-            text-transform: uppercase;
-            font-size: .9em;
-            color: #222;
-        }
-        .form-group {
-            margin-bottom: 25px;
-        }
-        #footer {
-            width: 100%;
-            position: fixed;
-            height: 35px;
-            bottom: 0;
-            background: #ccc;
-        }
-        main {
-            font-family: "ff-meta-serif-web-pro", serif;
-            font-size: 1.4em;
-            line-height: 1.75em;
-            color: #333;
-        }
-        main h2 {
-            font-family: "ff-meta-serif-web-pro", serif;
-            border-bottom: 4px double #ccc;
-        }
-        main p:first-of-type {
-            text-transform: uppercase;
-        }
-        main p {
-            margin-bottom: 1.5em;
-        }
-    </style>
+{% block head %}
+    <script type="text/javascript" src="//use.typekit.net/cet2iqp.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 {% endblock %}
-{% block content %}
-    <div class="row">
-        <aside class="col-sm-4">
-            <h1 class="sr-only">State of the Union Machine</h1>
-            <img class="img-responsive" src="/static/sotumachine-logo.png" alt="State of the Union Machine"/>
 
-            <form role="form">
-                <div class="form-group">
-                    <label for="">Barack Obama</label>
-                    <input type="range" class="form-control" min="0" max="10" step=".05" value="7" name="" id="">
-                </div>
-                <div class="form-group">
-                    <label for="">George W. Bush</label>
-                    <input type="range" class="form-control" min="0" max="10" step=".05" value="3" name="" id="">
-                </div>
-                <div class="form-group">
-                    <label for="">Bill Clinton</label>
-                    <input type="range" class="form-control" min="0" max="10" step=".05" value="3" name="" id="">
-                </div>
-                <div class="form-group">
-                    <label for="">George H. W. Bush</label>
-                    <input type="range" class="form-control" min="0" max="10" step=".05" value="3" name="" id="">
-                </div>
-                <div class="form-group">
-                    <label for="">Ronald Reagan</label>
-                    <input type="range" class="form-control" min="0" max="10" step=".05" value="3" name="" id="">
-                </div> 
-                <div class="form-group">
-                    <label for="">Theodore Roosevelt</label>
-                    <input type="range" class="form-control" min="0" max="10" step=".05" value="3" name="" id="">
-                </div>
-                <div class="form-group">
-                    <label for="">Abraham Lincoln</label>
-                    <input type="range" class="form-control" min="0" max="10" step=".05" value="3" name="" id="">
-                </div> 
-                <div class="form-group">
-                    <label for="">Thomas Jefferson</label>
-                    <input type="range" class="form-control" min="0" max="10" step=".05" value="3" name="" id="">
-                </div>
-                <div class="form-group">
-                    <label for="">George Washington</label>
-                    <input type="range" class="form-control" min="0" max="10" step=".05" value="3" name="" id="">
-                </div>                                                                                        
-            </form>
+{% block css %}
+    <link rel="stylesheet" href="static/screen.css"/>
+{% endblock %}
+
+{% block container %}
+        <aside id="sidebar">
+            <div class="sidebar-wrapper">
+                <section class="splash">
+                    <h1 class="sr-only">State of the Union Machine</h1>
+                    
+                    <img class="sotu-logo img-responsive" src="/static/sotumachine-logo.png" alt="State of the Union Machine"/>
+                    
+                    <div class="info">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae mauris in turpis mattis tincidunt. Phasellus cursus adipiscing lectus et venenatis. Suspend potenti. Duis mollis vestibulum ultrices.</p>
+                        <button type="button" class="btn btn-primary btn-cta">Generate a New Speech! <span class="glyphicon glyphicon-chevron-right"></span></button>
+                    </div>
+                    
+                    <canvas id="sotu-chart" width="200" height="200"></canvas>
+
+                    <a class="btn btn-info btn-back hidden"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
+                </section>
+
+                <section class="settings">
+                    <form role="form">
+                        <div class="form-group">
+                            <label for="">Barack Obama</label>
+                            <input type="range" class="form-control" min="0" max="10" step=".05" value="7" name="" id="">
+                        </div>
+                        <div class="form-group">
+                            <label for="">George W. Bush</label>
+                            <input type="range" class="form-control" min="0" max="10" step=".05" value="3" name="" id="">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Bill Clinton</label>
+                            <input type="range" class="form-control" min="0" max="10" step=".05" value="3" name="" id="">
+                        </div>
+                        <div class="form-group">
+                            <label for="">George H. W. Bush</label>
+                            <input type="range" class="form-control" min="0" max="10" step=".05" value="3" name="" id="">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Ronald Reagan</label>
+                            <input type="range" class="form-control" min="0" max="10" step=".05" value="3" name="" id="">
+                        </div> 
+                        <div class="form-group">
+                            <label for="">Theodore Roosevelt</label>
+                            <input type="range" class="form-control" min="0" max="10" step=".05" value="3" name="" id="">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Abraham Lincoln</label>
+                            <input type="range" class="form-control" min="0" max="10" step=".05" value="3" name="" id="">
+                        </div> 
+                        <div class="form-group">
+                            <label for="">Thomas Jefferson</label>
+                            <input type="range" class="form-control" min="0" max="10" step=".05" value="3" name="" id="">
+                        </div>
+                        <div class="form-group">
+                            <label for="">George Washington</label>
+                            <input type="range" class="form-control" min="0" max="10" step=".05" value="3" name="" id="">
+                        </div>                                                                                        
+                    </form>          
+                </section>
+            </div>
         </aside>
-        <main class="col-sm-8">
-            <div class="the-speech">
-                <h2>State of the Union</h2>
-                <p>
-                    Mr. Speaker, John F. Kennedy and Ronald Reagan:
-                </p>
-                <p>
-                    Through a strategy that develops every available source of strength, we need and sacrifice what we spend on education each year, we have to invest in basic research. Where jobs grew more slowly than during any prior expansion, where businesses will partner with the corrosive influence of lobbyists, I'll deliver when I took office, I've asked this Congress that helps them succeed. That Joe Biden originally wrote almost 20 years and less foreign oil than in 2008. This year.
-                </p>
-                <p>
-                    So that homeowners can move into a crisis that put millions out of anger or yield to the courage and sacrifice of those Washington gimmicks that lets us pretend we solve a problem. Air is safe to eat.
-                </p>
-                <p>
-                    Together, we have cleared away the rubble of crisis, and can say with renewed confidence that the state of our union is stronger.
-                </p>
-                <p>
-                    But we gather here knowing that there are millions of Americans whose hard work and dedication have not yet been rewarded. Our economy is our generation’s task, then, to reignite. The true engine of America’s economic growth – a rising, thriving middle class.               
-                </p>
+
+        <main>
+            <div class="row">
+                <div class="the-speech col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
+                    <h2>State<span class="fancy">of the</span>Union</h2>
+                    <p>
+                        Mr. Speaker, John F. Kennedy and Ronald Reagan:
+                    </p>
+                    <p>
+                        Through a strategy that develops every available source of strength, we need and sacrifice what we spend on education each year, we have to invest in basic research. Where jobs grew more slowly than during any prior expansion, where businesses will partner with the corrosive influence of lobbyists, I'll deliver when I took office, I've asked this Congress that helps them succeed. That Joe Biden originally wrote almost 20 years and less foreign oil than in 2008. This year.
+                    </p>
+                    <p>
+                        So that homeowners can move into a crisis that put millions out of anger or yield to the courage and sacrifice of those Washington gimmicks that lets us pretend we solve a problem. Air is safe to eat.
+                    </p>
+                    <p>
+                        Together, we have cleared away the rubble of crisis, and can say with renewed confidence that the state of our union is stronger.
+                    </p>
+                    <p>
+                        But we gather here knowing that there are millions of Americans whose hard work and dedication have not yet been rewarded. Our economy is our generation’s task, then, to reignite. The true engine of America’s economic growth – a rising, thriving middle class.               
+                    </p>
+                    <p>
+                        So that homeowners can move into a crisis that put millions out of anger or yield to the courage and sacrifice of those Washington gimmicks that lets us pretend we solve a problem. Air is safe to eat.
+                    </p>
+                    <p>
+                        Together, we have cleared away the rubble of crisis, and can say with renewed confidence that the state of our union is stronger.
+                    </p>
+                    <p>
+                        But we gather here knowing that there are millions of Americans whose hard work and dedication have not yet been rewarded. Our economy is our generation’s task, then, to reignite. The true engine of America’s economic growth – a rising, thriving middle class.               
+                    </p>                    
+                </div>
             </div>
         </main>
-    </div>
-    <div id="footer">
-        <a href="">Read our methodology</a>
-        <a href="">Download State of the Union 1980&ndash;2013</a>
-    </div>
+
+        <footer>
+            <div class="row">
+                <div class="col-md-6">
+                    <a href=""><span class="glyphicon glyphicon-book"></span> Read our methodology</a>
+                    <a href=""><span class="glyphicon glyphicon-download"></span> Download SOTU Speeches from 1980&ndash;2013</a>
+                </div>
+                
+                <div class="col-md-6">
+                    <a href=""><span class="glyphicon glyphicon-link"></span> Get Permalink</a>            
+                    <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                </div>
+
+            </div>          
+        </footer>        
+
+        {% block footer %}
+        {% endblock %}
+
 {% endblock %}
 
 {% block js %}
-    <script type="text/javascript">
-
-        $(function (){
-            $('input[type="range"]').change(function () {
-                var val = ($(this).val() - $(this).attr('min')) / ($(this).attr('max') - $(this).attr('min'));
-                
-                $(this).css('background-image',
-                            '-webkit-gradient(linear, left top, right top, '
-                            + 'color-stop(' + val + ', #ffdf40), '
-                            + 'color-stop(' + val + ', #222)'
-                            + ')'
-                            );
-            });
-
-        });        
-
-    </script>
+    <script src="static/chart.min.js"></script>
+    <script src="static/application.js"></script>
 {% endblock %}    

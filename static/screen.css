@@ -1,0 +1,254 @@
+/* Layout */
+
+body {
+    background: url('/static/handmadepaper.jpg');
+    font-family: "proxima-nova-condensed", sans-serif;
+    font-weight: 300;
+    line-height: 1.75em;
+}
+
+.sf-header {
+    margin-bottom: 0;
+    position: fixed;
+    width: 100%;
+    height: 45px;
+    z-index: 10;
+    top: 0;
+}
+
+.sf-header a.sf-logo  {
+    margin-right: 15px;
+    margin-top: 7px;
+}
+
+.container-fluid #sidebar,
+.container-fluid main {
+    margin-top: 25px;
+}
+
+
+/* Sidebar */
+
+#sidebar {
+    height: 100%;
+    background: #363a3d;
+    color: #ccc;
+    width: 300px;
+    position: fixed;
+    z-index: 1;
+    /*overflow: hidden;*/
+    overflow-y: scroll;
+}
+
+.sidebar-wrapper {
+    width: 601px;
+    position: relative;
+}
+
+.sidebar-wrapper.active{
+    left: -301px;
+}
+.splash,
+.settings {
+    float: left;
+    width: 300px;
+    padding: 25px;
+    padding-bottom: 80px;
+    position: relative;
+}
+.splash {
+    width: 301px;
+    border-right: 1px dashed #555;
+    font-size: 1.25em;
+    line-height: 1.5em;
+    color: #ddd;
+}
+
+.sotu-logo {
+    padding: 1em;
+}
+
+.splash .info {
+    padding: 1em 0;
+    margin: 2em 0 1em;
+    border-top: 4px double #222;
+    border-bottom: 4px double #222;
+}
+.settings form {
+    padding-top: 2em;
+}
+/* here lies buttons */
+
+.btn,
+.btn:link,
+.btn:active,
+.btn:visited {
+    width: 100%;
+    padding: 10px;           
+    border: 0;
+    border-radius: 3px;
+    height: 35px;
+    font-family: "proxima-nova-condensed", sans;
+    text-transform: uppercase;
+    color: #fff;
+}
+.btn.btn-cta {
+    margin: 10px 0;
+}
+.btn.btn-cta:hover {
+    background: #89171a;
+}
+.btn-back,
+.btn-back:hover {
+    border-radius: 0;    
+    width: 300px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background: rgba(0,0,0,.25);
+    height: 45px;
+    padding: 15px;
+    z-index: 5;
+}
+.btn-back:hover {
+    background: rgba(0,0,0,.35);    
+}
+.info .glyphicon-chevron-right {
+    left: 10px;
+    -webkit-animation: cta .8s ease-out infinite; /* Safari 4+ */
+    -moz-animation:    cta .8s infinite; /* Fx 5+ */
+    -o-animation:      cta .8s infinite; /* Opera 12+ */
+    animation:         cta .8s infinite;    
+}
+/* sidebar content*/
+
+
+#sotu-chart {
+    margin: 25px;
+}
+
+
+/* fancy schmancy range sliders */
+
+form label {
+    font-family: "proxima-nova-condensed",sans-serif;
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: .9em;
+    color: #ccc;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+input[type="range"]{
+    -webkit-appearance: none;
+    -moz-apperance: none;
+    border-radius: 6px;
+    height: 5px;
+    padding: 0;
+    background-image: -webkit-gradient(
+        linear,
+        left top,
+        right top,
+        color-stop(0.3, #5bc0de),
+        color-stop(0.3, #222)
+    );
+    border-radius: 0;
+    border: 0;
+}
+
+input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none !important;
+    background-color: #fff;
+    height: 13px;
+    width: 6px;
+    cursor: pointer;
+}        
+
+
+/* sotu speech */
+
+main {
+    margin-left: 300px;
+    padding: 0 15px;
+}
+
+.the-speech {
+    font-family: "ff-meta-serif-web-pro", serif;
+    font-size: 1.4em;
+    line-height: 1.75em;
+    color: #333;    
+    padding: 2em;
+}
+
+.the-speech h2 {
+    width: 100%;
+    text-align: center;
+    font-family: "ff-meta-serif-web-pro", serif;
+    padding-bottom: .25em;
+    border-bottom: 4px double #ccc;
+    font-size: 4.5em;
+    color: #2980b9;
+    letter-spacing: -1px;
+    padding: 0.5em 0 0.25em;
+    margin-bottom: .75em;
+    line-height: .75em;
+}
+
+.the-speech h2 span.fancy {
+    font-size: 0.6em;
+    font-style: italic;
+    text-transform: lowercase;
+    font-family: times;
+    display: inline-block;
+    margin: 0 5px 0 10px;
+    position: relative;
+    top: -0.25em;
+}
+
+.the-speech p:first-of-type {
+    text-transform: uppercase;
+}
+
+.the-speech p {
+    margin-bottom: 1.5em;
+}
+
+
+/* footer */
+
+footer {
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding: 10px;
+    margin-left: 300px;
+    position: fixed;
+    height: 45px;
+    min-height: 45px;
+    bottom: 0;
+    background: rgba(255,255,255,0.75);
+    border-color: #eee;
+}
+
+
+
+/* Animations */
+@-webkit-keyframes cta {
+  0%, 100% { left: 10px; }
+  50%      { left: 15px; }
+}
+@-moz-keyframes cta {
+  0%, 100% { left: 10px; }
+  50%      { left: 15px; }
+}
+@-o-keyframes cta {
+  0%, 100% { left: 10px; }
+  50%      { left: 15px; }
+}
+@keyframes cta {
+  0%, 100% { left: 10px; }
+  50%      { left: 15px; }
+}
