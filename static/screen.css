@@ -249,15 +249,15 @@ main {
 /* footer */
 
 footer {
-    width: 100%;
+    width: 100%;/*
     padding-top: 10px;
-    padding-bottom: 10px;
+    padding-bottom: 10px;*/
     padding: 10px;
     margin-left: 300px;
     position: fixed;        
     min-height: 45px;
     bottom: 0;
-    background: rgba(255,255,255,0.75);
+    background: rgba(245,245,245,0.9);
     border-color: #eee;
     transition: background 200ms ease-out;
 }
@@ -266,19 +266,20 @@ footer:hover {
     background: rgba(255,255,255,1);    
 }
 
-footer .left .footer-link {
-    float: left;
-}
-
-footer .right .footer-link {
-    float: right;
+footer .left {
+    /*border-bottom: 1px dashed #ddd;*/
+    /*margin-bottom: 10px;*/
 }
 
 .footer-link {
-    margin: 0 10px;
+    float: left;
+    margin: 5px 10px 0px;
 }
-
-a.footer-link {
+.right .footer-link {
+    float: right;
+    text-align: right;
+}
+.footer-link a {
     padding-bottom: 3px;
     transition: color 150ms ease-out;
 }
@@ -287,6 +288,9 @@ a.footer-link:hover {
     cursor: pointer;
 }
 
+.footer-link a .glyphicon {
+    margin-right: 5px;
+}
 
 /* Animations */
 @-webkit-keyframes cta {
@@ -304,4 +308,12 @@ a.footer-link:hover {
 @keyframes cta {
   0%, 100% { left: 10px; }
   50%      { left: 15px; }
+}
+
+
+/* Media Queies */
+@media (max-width: 1055px) {
+    .footer-link {
+        width: 100%;
+    }
 }
