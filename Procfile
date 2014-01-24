@@ -1,2 +1,2 @@
-web: gunicorn web:app
-worker: rqworker -c rq_settings
+web: gunicorn -t 120 web:app
+worker: rqworker -c settings
