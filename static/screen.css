@@ -250,15 +250,15 @@ main {
 /* footer */
 
 footer {
-    width: 100%;
+    width: 100%;/*
     padding-top: 10px;
-    padding-bottom: 10px;
+    padding-bottom: 10px;*/
     padding: 10px;
     margin-left: 300px;
     position: fixed;        
     min-height: 45px;
     bottom: 0;
-    background: rgba(255,255,255,0.75);
+    background: rgba(245,245,245,0.9);
     border-color: #eee;
     transition: background 200ms ease-out;
 }
@@ -267,20 +267,19 @@ footer:hover {
     background: rgba(255,255,255,1);    
 }
 
-footer .left, footer .right{
-    /*overflow: auto;*/
-}
 footer .left {
-    border-bottom: 1px dashed #ddd;
-    margin-bottom: 10px;
+    /*border-bottom: 1px dashed #ddd;*/
+    /*margin-bottom: 10px;*/
 }
 
 .footer-link {
     float: left;
-    margin: 5px 10px;
-    width: 100%;
+    margin: 5px 10px 0px;
 }
-
+.right .footer-link {
+    float: right;
+    text-align: right;
+}
 .footer-link a {
     padding-bottom: 3px;
     text-decoration: none;
@@ -292,6 +291,9 @@ footer .left {
     border-bottom: 1px dotted #827b78;
 }
 
+.footer-link a .glyphicon {
+    margin-right: 5px;
+}
 
 /* Animations */
 @-webkit-keyframes cta {
@@ -309,4 +311,12 @@ footer .left {
 @keyframes cta {
   0%, 100% { left: 10px; }
   50%      { left: 15px; }
+}
+
+
+/* Media Queies */
+@media (max-width: 1055px) {
+    .footer-link {
+        width: 100%;
+    }
 }

@@ -76,7 +76,7 @@ $(function (){
     } 
 
     $('#permalink').popover({
-        placement: 'top',
+        placement: 'left',
         html: true,
         content: geturl()
     });
