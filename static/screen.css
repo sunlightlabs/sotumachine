@@ -43,6 +43,7 @@ body {
 .sidebar-wrapper {
     width: 601px;
     position: relative;
+    transition: all 300ms ease-out;
 }
 
 .sidebar-wrapper.active{
@@ -58,7 +59,7 @@ body {
 }
 .splash {
     width: 301px;
-    border-right: 1px dashed #555;
+    border-right: 1px dashed #999;
     font-size: 1.25em;
     line-height: 1.5em;
     color: #ddd;
