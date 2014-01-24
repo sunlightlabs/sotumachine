@@ -172,3 +172,20 @@ class SpeechWriter(object):
             prez_id = random.choice(self.labelpopulation)
         return paragraph
 
+if __name__ == "__main__":
+    sys.stderr.write("Starting demo...\n")
+    sys.stderr.write("="*80+'\n')
+    from utils import get_random_id_weight_string
+    
+    stats = json.load(open('stats.json'))
+    iws = get_random_id_weight_string(stats)
+
+    sw = SpeechWriter('stats.json')
+    speech = sw.generate_speech(iws)
+
+    sys.stderr.write("One Paragraph...\n\n")
+    print speech.next()
+
+    sys.stderr.write("Now with citations...\n\n")
+    speech = sw.generate_speech(iws,citations=True)
+    print speech.next()
