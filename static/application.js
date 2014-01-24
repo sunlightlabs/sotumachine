@@ -33,7 +33,6 @@ $(function (){
     new Chart(ctx).Doughnut(data, options);
 
 
-
     // gradient for slider fill
         
     function fillSlider(e) {
