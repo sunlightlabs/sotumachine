@@ -29,9 +29,15 @@ var presidents = {
     var width = parseInt(chartDiv.style("width")),
         height = parseInt(chartDiv.style("height")),
         radius = Math.min(width, height) / 2;
+                        
+    var color_classes = [];
+    _.each( _.keys(presidents), 
+           function(e, i, ls) { 
+             color_classes.push('q' + i + '-' + _.keys(presidents).length); 
+                });
 
     var color = d3.scale.ordinal()
-            .range(_.range(_.keys(presidents).length))
+            .range(color_classes)
             .domain(_.keys(presidents));
 
     var arc = d3.svg.arc()
@@ -71,7 +77,7 @@ var presidents = {
         arcs.append("path")
               .attr("d", arc)
               //.style("fill", "#F45832");
-              .attr("class", function(d,i) { return "q"+color(d.data.id)+"-10";});
+              .attr("class", function(d,i) { return color(d.data.id);});
 
         /*
         arcs.append("text")

@@ -131,16 +131,15 @@ body {
     width: 200px;
 }
 
-.prezColors .q0-10 { fill:#BD2D28;  }
-.prezColors .q1-10 { fill:#42A5B3;  }
-.prezColors .q2-10 { fill:#5C8100;  }
-.prezColors .q3-10 { fill:#E2BA22;  }
-.prezColors .q4-10 { fill:#8E6C8A;  }
-.prezColors .q5-10 { fill:#E58429;  }
-.prezColors .q6-10 { fill:#0F8C79;  }
-.prezColors .q7-10 { fill:#D15A86;  }
-.prezColors .q8-10 { fill:#6B99A1;  }
-.prezColors .q9-10 { fill:#6BBBA1;  }
+.prezColors .q0-9 { fill:#BD2D28;  }
+.prezColors .q1-9 { fill:#42A5B3;  }
+.prezColors .q2-9 { fill:#5C8100;  }
+.prezColors .q3-9 { fill:#E2BA22;  }
+.prezColors .q4-9 { fill:#8E6C8A;  }
+.prezColors .q5-9 { fill:#E58429;  }
+.prezColors .q6-9 { fill:#0F8C79;  }
+.prezColors .q7-9 { fill:#D15A86;  }
+.prezColors .q8-9 { fill:#6B99A1;  }
 
 /* form and fancy schmancy range sliders */
 
@@ -267,29 +266,25 @@ footer:hover {
     background: rgba(255,255,255,1);    
 }
 
-footer .left, footer .right{
-    /*overflow: auto;*/
+footer .left .footer-link {
+    float: left;
 }
-footer .left {
-    border-bottom: 1px dashed #ddd;
-    margin-bottom: 10px;
+
+footer .right .footer-link {
+    float: right;
 }
 
 .footer-link {
-    float: left;
-    margin: 5px 10px;
-    width: 100%;
+    margin: 0 10px;
 }
 
-.footer-link a {
+a.footer-link {
     padding-bottom: 3px;
-    text-decoration: none;
     transition: color 150ms ease-out;
 }
 
-.footer-link a:hover {
+a.footer-link:hover {
     cursor: pointer;
-    border-bottom: 1px dotted #827b78;
 }
 
 
