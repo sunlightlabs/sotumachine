@@ -26,15 +26,15 @@ body {
     margin-top: 25px;
 }
 
-a:hover {
-    cursor: pointer;
-}
+
+
+
 
 /* Sidebar */
 
 #sidebar {
     height: 100%;
-    background: #363a3d;
+    background: #414c50 url('/static/concrete_wall.jpg');
     width: 300px;
     position: fixed;
     z-index: 1;
@@ -98,6 +98,7 @@ a:hover {
 }
 .btn.btn-cta {
     margin: 10px 0;
+    transition: background 150ms ease-out;
 }
 .btn.btn-cta:hover {
     background: #89171a;
@@ -124,8 +125,8 @@ a:hover {
     -o-animation:      cta .8s infinite; /* Opera 12+ */
     animation:         cta .8s infinite;    
 }
-/* sidebar content*/
 
+/* sidebar content*/
 
 #sotu-chart {
     margin: 25px;
@@ -156,10 +157,7 @@ a:hover {
     color: #ccc;
 }
 
-.form-group {
-}
-
-input[type="range"]{
+input[type="range"] {
     -webkit-appearance: none;
     -moz-apperance: none;
     border-radius: 6px;
@@ -170,10 +168,16 @@ input[type="range"]{
         left top,
         right top,
         color-stop(0.3, #c9a706),
-        color-stop(0.3, #222)
+        color-stop(0.3, #333)
     );
     border-radius: 0;
     border: 0;
+    transition: opacity 100ms ease-out;
+}
+
+input[type="range"]:hover {
+    opacity: .8;
+    cursor: pointer;
 }
 
 input[type='range']::-webkit-slider-thumb {
@@ -242,21 +246,38 @@ footer {
     padding-bottom: 10px;
     padding: 10px;
     margin-left: 300px;
-    position: fixed;
-    height: 45px;
+    position: fixed;        
     min-height: 45px;
     bottom: 0;
     background: rgba(255,255,255,0.75);
     border-color: #eee;
     transition: background 200ms ease-out;
 }
+
 footer:hover {
     background: rgba(255,255,255,1);    
 }
-.footer-link {
-    padding: 0 10px;
+
+footer .left .footer-link {
+    float: left;
 }
 
+footer .right .footer-link {
+    float: right;
+}
+
+.footer-link {
+    margin: 0 10px;
+}
+
+a.footer-link {
+    padding-bottom: 3px;
+    transition: color 150ms ease-out;
+}
+
+a.footer-link:hover {
+    cursor: pointer;
+}
 
 
 /* Animations */
