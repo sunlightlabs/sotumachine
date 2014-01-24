@@ -27,9 +27,6 @@ body {
 }
 
 
-
-
-
 /* Sidebar */
 
 #sidebar {
@@ -130,8 +127,20 @@ body {
 
 #sotu-chart {
     margin: 25px;
+    height: 200px;
+    width: 200px;
 }
 
+.prezColors .q0-10 { fill:#BD2D28;  }
+.prezColors .q1-10 { fill:#42A5B3;  }
+.prezColors .q2-10 { fill:#5C8100;  }
+.prezColors .q3-10 { fill:#E2BA22;  }
+.prezColors .q4-10 { fill:#8E6C8A;  }
+.prezColors .q5-10 { fill:#E58429;  }
+.prezColors .q6-10 { fill:#0F8C79;  }
+.prezColors .q7-10 { fill:#D15A86;  }
+.prezColors .q8-10 { fill:#6B99A1;  }
+.prezColors .q9-10 { fill:#6BBBA1;  }
 
 /* form and fancy schmancy range sliders */
 

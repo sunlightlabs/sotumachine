@@ -22,14 +22,16 @@ var presidents = {
   "26": "Theodore Roosevelt"
 };
 
-    var testIWS = '410433441264164423012400031';
-    
-    var width = 200,
-        height = 200,
+    var testIWS = '412433441264164423012403031';
+   
+    var chartDiv = d3.select('#sotu-chart');
+ 
+    var width = parseInt(chartDiv.style("width")),
+        height = parseInt(chartDiv.style("height")),
         radius = Math.min(width, height) / 2;
 
     var color = d3.scale.ordinal()
-            .range(["#BD2D28", "#42A5B3", "#5C8100", "#E2BA22", "#8E6C8A", "#E58429", "#0F8C79", "#D15A86", "#6B99A1", "#6BBBA1"])
+            .range(_.range(_.keys(presidents).length))
             .domain(_.keys(presidents));
 
     var arc = d3.svg.arc()
@@ -63,11 +65,13 @@ var presidents = {
         var arcs = donutChart.selectAll(".arc")
                 .data(pie(data))
                 .enter().append("g")
-                .attr("class", "arc");
+                .classed("arc", true)
+                .classed("prezColors", true);
 
         arcs.append("path")
               .attr("d", arc)
-              .style("fill", function(d) { return color(d.data.id); });
+              //.style("fill", "#F45832");
+              .attr("class", function(d,i) { return "q"+color(d.data.id)+"-10";});
 
         /*
         arcs.append("text")
@@ -78,4 +82,7 @@ var presidents = {
         */
     };
 
+
+$(function (){
     drawChart(testIWS);
+});
