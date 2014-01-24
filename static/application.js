@@ -35,15 +35,24 @@ $(function (){
 
 
     // gradient for slider fill
-    $('input[type="range"]').change(function () {
-        var val = ($(this).val() - $(this).attr('min')) / ($(this).attr('max') - $(this).attr('min'));
         
-        $(this).css('background-image',
-                    '-webkit-gradient(linear, left top, right top, '
-                    + 'color-stop(' + val + ', #5bc0de), '
-                    + 'color-stop(' + val + ', #222)'
-                    + ')'
-                    );
+    function fillSlider(e) {
+            var val = ($(e).val() - $(e).attr('min')) / ($(e).attr('max') - $(e).attr('min'));
+            
+            $(e).css('background-image',
+                        '-webkit-gradient(linear, left top, right top, '
+                        + 'color-stop(' + val + ', #5bc0de), '
+                        + 'color-stop(' + val + ', #222)'
+                        + ')'
+                        );
+    }
+
+    $('input[type="range"]').each(function () {    
+        fillSlider(this);
+    });
+
+    $('input[type="range"]').change(function () {
+        fillSlider(this);
     });
 
     // buttons do things
