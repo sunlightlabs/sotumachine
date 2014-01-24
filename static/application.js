@@ -1,6 +1,6 @@
 $(function (){
 
-    // chart.js
+    /*// chart.js
     var ctx = document.getElementById("sotu-chart").getContext("2d");
     var data = [
         {
@@ -31,7 +31,7 @@ $(function (){
     }
     
     new Chart(ctx).Doughnut(data, options);
-
+*/
 
     // gradient for slider fill
         
