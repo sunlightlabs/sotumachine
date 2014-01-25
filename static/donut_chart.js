@@ -28,7 +28,10 @@ var presidents = {
  
     var width = parseInt(chartDiv.style("width")),
         height = parseInt(chartDiv.style("height")),
-        radius = Math.min(width, height) / 2;
+        radius = Math.min(width, height) / 2,
+        pieInnerRadius = radius - 30,
+        pieOuterRadius = radius - 10,
+        pictureRadius = radius - 40;
                         
     var color_classes = [];
     _.each( _.keys(presidents), 
@@ -41,8 +44,8 @@ var presidents = {
             .domain(_.keys(presidents));
 
     var arc = d3.svg.arc()
-            .outerRadius(radius - 10)
-                .innerRadius(radius - 30);
+            .outerRadius(pieInnerRadius)
+                .innerRadius(pieOuterRadius);
 
     var pie = d3.layout.pie()
             .sort(function(a, b) { return b.weight - a.weight; })
@@ -52,13 +55,50 @@ var presidents = {
                 .attr("width", width)
                 .attr("height", height);
 
+    var defs = svg.append("defs");
+                
+    var clipPath = svg.append("clipPath")
+           .attr("id", "clipCircle")
+           .append("circle")
+           .attr("r", pictureRadius)
+           .attr("cx", 60)
+           .attr("cy", 60);
+
+    var prezPicture = svg.append("g") 
+                .attr("transform", "translate(" + ((width / 2) - pictureRadius) + "," + ((height / 2) - pictureRadius) + ")")
+                .append("image")
+                .attr("width", function(){ return pictureRadius * 2;})
+                .attr("height", function(){ return pictureRadius * 2;})
+                .attr("clip-path", "url(#clipCircle)");
+    
+    var updatePicture = function(id) { prezPicture.attr("xlink:href", "static/"+id+".jpg"); };
+//"url(#pattern-"+id+")"
     var donutChart = svg.append("g")
                 .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
     
 
     var drawChart = function (idWeightString) {
-
         data = parseIdWeightString(idWeightString);
+        
+        var picturePatterns = defs.selectAll("pattern")
+                 .data(data)
+                 .enter()
+                 .append("pattern")
+                 .attr("id", function(d){ return "pattern-"+d.id; })
+                 .attr("patternunits", "userSpaceOnUse")
+                 .attr("x",0)
+                 .attr("y",0)
+                 .attr("width", pictureRadius * 2)
+                 .attr("height", pictureRadius * 2)
+                 .append("image")
+                 .attr("x",0)
+                 .attr("y",0)
+                 .attr("width", pictureRadius * 2)
+                 .attr("height", pictureRadius * 2)
+                 .attr("xlink:href",function(d){ return "static/"+d.id+".jpg"; });
+
+
+        firstPrez = d3.max(data, function(d){ d.weight; });
 
         console.log(data);
 
@@ -88,7 +128,10 @@ var presidents = {
         */
     };
 
+        
+        
 
 $(function (){
     drawChart(testIWS);
+    updatePicture("44");
 });
