@@ -25,6 +25,7 @@ class President(object):
         self._ngram_model = cPickle.load(_ngram_file)
         self._stats = personal_stats
         self.ngram_order = self._ngram_model._n
+        self.window_length = 6
 
     @property
     def avg_para_length(self):
@@ -51,7 +52,8 @@ class President(object):
 
     def next_word(self, context):
         result = self._ngram_model.generate(1, context=context)
-        return (result[-self.ngram_order:], result[-1])
+        window = min([self.window_length, len(result)])
+        return (result[-window:], result[-1])
 
     def next_sent(self, context=None):
         sent = []
@@ -166,7 +168,7 @@ class SpeechWriter(object):
                 paragraph.append((prez_id, retokenize(sentence)))
             else:
                 paragraph.append(retokenize(sentence))
-            self.context = sentence[-3:]
+            self.context = sentence[-1:]
             prez_id = random.choice(self.labelpopulation)
         return paragraph
 
