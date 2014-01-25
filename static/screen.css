@@ -131,15 +131,16 @@ body {
     width: 200px;
 }
 
-.prezColors .q0-9 { fill:#BD2D28;  }
-.prezColors .q1-9 { fill:#42A5B3;  }
-.prezColors .q2-9 { fill:#5C8100;  }
-.prezColors .q3-9 { fill:#E2BA22;  }
-.prezColors .q4-9 { fill:#8E6C8A;  }
+
+.prezColors .q0-9 { fill:#F2DA57;  }
+.prezColors .q1-9 { fill:#F6B656;  }
+.prezColors .q2-9 { fill:#E25A42;  }
+.prezColors .q3-9 { fill:#DCBDCF;  }
+.prezColors .q4-9 { fill:#B396AD;  }
 .prezColors .q5-9 { fill:#E58429;  }
-.prezColors .q6-9 { fill:#0F8C79;  }
-.prezColors .q7-9 { fill:#D15A86;  }
-.prezColors .q8-9 { fill:#6B99A1;  }
+.prezColors .q6-9 { fill:#B0CBDB;  }
+.prezColors .q7-9 { fill:#6BBBA1;  }
+.prezColors .q8-9 { fill:#C8D7A1;  }
 
 /* form and fancy schmancy range sliders */
 
