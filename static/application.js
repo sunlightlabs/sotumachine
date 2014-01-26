@@ -1,41 +1,5 @@
 $(function (){
 
-/*
-    //var makeIdWeightString = function( weights ){
-        //var iws = "";
-        
-        //$.each(weights, function(w) {
-        //    iws.
-
-    var generate_speech = function() {
-        //var iws = ""
-
-        //$('input[type=range]').each( input, 
-
-        $.getJSON( 
-        "http://localhost:8000/generate?iws=413434442260163424013402031", 
-        function( data ) {
-            $('.the-speech p').remove();
-            speech = $('.the-speech');
-
-            $.each( data, function( i, d ) {
-                var p = $("<p>", {class: "prezColors"})
-                $.each( d, function( j, sentence ) {
-                    $( "<span>" ).addClass(
-                                    "sentence"
-                                ).data(
-                                    "prez-id", sentence[0]
-                                ).text(
-                                    sentence[1]
-                                ).appendTo(p)});
-                p.appendTo(speech);
-                });
-        });
-
-    };
-
-    generate_speech();
-*/
     // gradient for slider fill
 
     function fillSlider() {
