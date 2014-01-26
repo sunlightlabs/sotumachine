@@ -257,8 +257,12 @@ main {
 
 .the-speech p {
     margin-bottom: 1.5em;
+    pointer-events: none;
 }
 
+div.the-speech-content {
+    pointer-events: none;
+}
 
 /* footer */
 

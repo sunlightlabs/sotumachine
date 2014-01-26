@@ -1,3 +1,6 @@
+
+var currentIWS;
+
 $(function (){
 
     // gradient for slider fill
@@ -64,9 +67,11 @@ $(function (){
         var speech = this;
         iws = iws || this.randomIWS();
         this.clear();
+        $.when(
         $.get(
             '/generate?iws=' + iws,
             function (data, status, xhr) {
+                console.log('processing data');
                 for (var i = 0; i < data.content.length; i++) {
 
                     var pElem = $('<p>');
@@ -82,10 +87,13 @@ $(function (){
                     }
 
                     speech.elem.append(pElem);
-
                 }
+                console.log('done appending paragraphs');
             }
-        );
+        )).then( function() {
+            currentIWS = iws;
+            dispatch.generated(currentIWS);
+        });
     };
     Speech.prototype.randomIWS = function() {
         var result = null;
@@ -105,7 +113,7 @@ $(function (){
 
     $('a.generate-it').click(function(ev) {
         ev.preventDefault();
-        speech.generate();
+        speech.generate()
     });
 
 });
