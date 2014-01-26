@@ -44,6 +44,7 @@ body {
     overflow: hidden;
     overflow-x: hidden;
     overflow-y: scroll;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
     font-size: 1.25em;
     line-height: 1.5em;
     color: #ddd;    
