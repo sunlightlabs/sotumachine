@@ -7,6 +7,12 @@ body {
     line-height: 1.75em;
 }
 
+.section-heading {
+    font-weight: 700;
+    display: block;
+    margin: 15px 0;
+}
+
 .sf-header {
     margin-bottom: 0;
     position: fixed;
@@ -275,9 +281,11 @@ footer {
     transition: background 200ms ease-out;
 }
 
-footer:hover {
-    background: rgba(255,255,255,1);    
+footer.active, footer:hover {
+    background: rgba(255,255,255,1);
 }
+
+footer.active { border-top: 1px solid #c9a706; }
 
 footer .left {
     /*border-bottom: 1px dashed #ddd;*/
@@ -305,6 +313,23 @@ footer .left {
     margin-right: 5px;
 }
 
+/* methodology */
+
+.methodology {
+    overflow: hidden;
+    max-height: 0;
+    transition: all 0.3s ease-out;
+}
+.methodology.active{
+    max-height: 50em;
+}
+.methodology .content {
+    padding: 15px;
+    font-size: 1.25em;
+    color: #666;
+    border-bottom: 1px dashed #ccc;
+}
+
 /* Animations */
 @-webkit-keyframes cta {
   0%, 100% { left: 10px; }
@@ -324,7 +349,7 @@ footer .left {
 }
 
 
-/* Media Queies */
+/* Media Queries */
 @media (max-width: 1055px) {
     .footer-link {
         width: 100%;

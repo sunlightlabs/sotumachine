@@ -60,6 +60,14 @@ $(function (){
     $(window).on('resize', updateFooterWidth);
     updateFooterWidth();
 
+    // toggle methodology
+
+    $('.methodolgy-link').click(function() {
+      $('.methodology').toggleClass('active');
+      $footer.toggleClass('active');
+    });
+
+    // speech
 
     function Speech(elem) {
         this.elem = $(elem);
