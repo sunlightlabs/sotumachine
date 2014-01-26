@@ -23,13 +23,15 @@ def retokenize(output_list):
         pre_space = True
         if word == '~SENT~':
             continue
+        elif previous_char == '$':
+            pre_space = False
         elif word.isalnum():
             pre_space = True
         elif word in ['Dr.', 'Mr.', 'Mrs.', 'M.']:
             pre_space = True
         elif (word[0].isalnum()) and (word[-1].isalnum()) and (('-' in word) or ('.' in word)):
             pre_space = True
-        elif word[-1] == ':':
+        elif word[:-1].isalpha():
             pre_space = True
         elif not previous_char.isalnum():
             pre_space = True
