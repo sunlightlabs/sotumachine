@@ -3,6 +3,10 @@ var currentIWS;
 
 $(function (){
 
+    function Console() {};
+    Console.prototype.log = function(msg) {};
+    console = console || new Console();
+
     // gradient for slider fill
 
     function fillSlider() {
