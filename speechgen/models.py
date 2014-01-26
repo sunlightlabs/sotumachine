@@ -48,7 +48,9 @@ class President(object):
             return self._default_preamble
         else:
             text = random.choice(self._stats['preambles'])
-            return nltk.word_tokenize(nltk.clean_html(text))
+            p = nltk.word_tokenize(nltk.clean_html(text))
+            p.append('~SENT~')
+            return p
 
     def next_word(self, context):
         result = self._ngram_model.generate(1, context=context)
@@ -67,6 +69,7 @@ class President(object):
         if not context:
             _context = self.preamble
             sent.extend(_context)
+            return sent
         nw = ""
         while nw != '~SENT~':
             _context, nw = self.next_word(_context)
