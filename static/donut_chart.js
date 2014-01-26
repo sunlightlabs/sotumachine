@@ -1,6 +1,7 @@
+$(function (){
 // EVENT DISPATCHER
 
-dispatch = d3.dispatch("load", "generated", "highlight", "unhighlight");
+window.dispatch = d3.dispatch("load", "generated", "highlight", "unhighlight");
 
 // DONUT CHART
 
@@ -142,11 +143,25 @@ var donutChart = svg.append("g")
 var path = donutChart.selectAll("path"); 
 
 var firstPrezID;   
+    
+var sentenceHighlighting = function() {
+    d3.selectAll('.sentence')
+            .on('mouseover', function(d) {
+                var prez_id = String(d3.select(this).attr('data-prez-id'));
+                dispatch.highlight(prez_id);
+            })
+            .on('mouseout', function(d) {
+                var prez_id = String(d3.select(this).attr('data-prez-id'));
+                dispatch.unhighlight(prez_id);
+            });
+};
 
 dispatch.on("generated", function (id_weight_string) {
     console.log('called dispatch.generated')
     new_data = parseIdWeightString(id_weight_string);
 
+    sentenceHighlighting();
+    
     testvar = new_data;
      
     firstPrezID = d3.select('.the-speech p:first-of-type span:first-of-type').attr('data-prez-id');
@@ -185,21 +200,7 @@ dispatch.on("generated", function (id_weight_string) {
         .duration(750)
         .attrTween("d", arcTween);
 
-    d3.selectAll('.sentence')
-            .on('mouseover', function(d) {
-                var prez_id = String(d3.select(this).attr('data-prez-id'));
-                dispatch.highlight(prez_id);
-            })
-            .on('mouseout', function(d) {
-                var prez_id = String(d3.select(this).attr('data-prez-id'));
-                dispatch.unhighlight(prez_id);
-            });
-
 });
-
-//var init_button = d3.select('.btn-primary');
-
-//init_button.on('click',function(){ dispatch.generate(testIWS);});
 
 dispatch.on("highlight", function(prez_id) {
     // Make tooltip visible, put info into it and have it follow the cursor
@@ -270,7 +271,6 @@ dispatch.on("unhighlight", function(prez_id) {
 });
 
   
-        
+dispatch.generated(testIWS);        
 
-$(function (){
 });
