@@ -65,7 +65,7 @@ $(function (){
     };
     Speech.prototype.generate = function(iws) {
         var speech = this;
-        iws = iws || this.randomIWS();
+        iws = iws || this.getIWS();
         this.clear();
         $.when(
         $.get(
@@ -107,6 +107,17 @@ $(function (){
             }
         });
         return result;
+    };
+    Speech.prototype.getIWS = function() {
+        var iws = _.reduce(
+            $('#president-form input'),
+            function(memo, elem) {
+                var $elem = $(elem);
+                return memo + $elem.attr('data-prez-id') + $elem.val();
+            },
+            ''
+        );
+        return iws;
     };
 
     speech = new Speech('.the-speech-content');
