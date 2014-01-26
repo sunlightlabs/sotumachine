@@ -27,6 +27,34 @@ presidents = {
  'Thomas Jefferson' : 03,
  }
 
+replace_chars = {
+'&deg;': ' degree',
+'&eacute;': 'e',
+'&frasl;': '/',
+'&lsquo;': "'",
+'&lt;': " < ",
+'&mdash;': " - ",
+'&Ocirc;': "O",
+'&Otilde;': "O",
+'&pound;': "pounds ",
+'&#8226;': "",
+'\xc2\x97':' - ',
+'\xc2\x91': "'",
+'\xc2\x92': "'",
+'\xc2\x93': '"',
+'\xc2\x94': '"',
+'\xe2\x80\x98':"'",
+'\xe2\x80\x99':"'",
+'\xe2\x80\x9a':"'",
+'\xe2\x80\x9b':"'",
+'\xe2\x80\x9c':'"',
+'\xe2\x80\x9d':'"',
+'\xe2\x80\x9f':'"',
+'\xe2\x80\x9e':'"',
+'\x60\x60': '"',
+}
+
+
 def est(fdist, bins):
     return LidstoneProbDist(fdist, 0.2)
 
@@ -50,6 +78,8 @@ def parse_transcript(transcript_filename):
     with open(transcript_filename) as transcript:
         for line in transcript:
             raw = nltk.clean_html(line.strip())
+            for orig_char, new_char in replace_chars.iteritems():
+                raw = raw.replace(orig_char, new_char)
             if raw:
                 speech.extend(tokenize_and_demarcate(raw))
     return speech
