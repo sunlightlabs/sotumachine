@@ -25,4 +25,5 @@ def archive_speech(speech):
     k.set_contents_from_string(json.dumps(speech), headers={'Content-Type': 'application/json'})
     k.set_acl('public-read')
 
+    del speech['content']
     db.speeches.insert(speech)
