@@ -133,15 +133,15 @@ body {
 }
 
 
-.prezColors .q0-9 { fill:#F2DA57;  }
-.prezColors .q1-9 { fill:#F6B656;  }
-.prezColors .q2-9 { fill:#E25A42;  }
-.prezColors .q3-9 { fill:#DCBDCF;  }
-.prezColors .q4-9 { fill:#B396AD;  }
-.prezColors .q5-9 { fill:#E58429;  }
-.prezColors .q6-9 { fill:#B0CBDB;  }
-.prezColors .q7-9 { fill:#6BBBA1;  }
-.prezColors .q8-9 { fill:#C8D7A1;  }
+.prezColors .q0-9 { fill:#F2DA57;  background-color:#F2DA57;}
+.prezColors .q1-9 { fill:#F6B656;  background-color:#F6B656;}
+.prezColors .q2-9 { fill:#E25A42;  background-color:#E25A42;}
+.prezColors .q3-9 { fill:#DCBDCF;  background-color:#DCBDCF;}
+.prezColors .q4-9 { fill:#B396AD;  background-color:#B396AD;}
+.prezColors .q5-9 { fill:#E58429;  background-color:#E58429;}
+.prezColors .q6-9 { fill:#B0CBDB;  background-color:#B0CBDB;}
+.prezColors .q7-9 { fill:#6BBBA1;  background-color:#6BBBA1;}
+.prezColors .q8-9 { fill:#C8D7A1;  background-color:#C8D7A1;}
 
 /* form and fancy schmancy range sliders */
 

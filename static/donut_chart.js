@@ -16,7 +16,6 @@ var presidents = {
   "26": {"name": "Theodore Roosevelt"}
 };
 
-
 var tooltip = d3.select("body").append("div")   
     .attr("class", "tooltip")               
     .style("opacity", 0);
@@ -39,7 +38,6 @@ var testvar;
                 });
         return parsedIdWeights;
     };
-
 
     var testIWS = '412433441264164423012403031';
    
@@ -143,17 +141,17 @@ var testvar;
    
     var path = donutChart.selectAll("path"); 
 
-    
+    var firstPrez;   
 
     dispatch.on("generate", function (id_weight_string) {
-        
+
         new_data = parseIdWeightString(id_weight_string);
 
         console.log(new_data);
 
         testvar = new_data;
          
-        var firstPrez = _.max(new_data, function(d){ return d.weight; });
+        firstPrez = _.max(new_data, function(d){ return d.weight; });
 
         weight_total = d3.sum(new_data, function(d){ return d.weight; });
 
@@ -193,6 +191,16 @@ var init_button = d3.select('.btn-primary');
 
 init_button.on('click',function(){ dispatch.generate(testIWS);});
 
+var spans  = d3.selectAll('.sentence')
+            .on('mouseover', function(d) {
+                var prez_id = String(d3.select(this).attr('data-prez-id'));
+                dispatch.highlight(prez_id);
+            })
+            .on('mouseout', function(d) {
+                var prez_id = String(d3.select(this).attr('data-prez-id'));
+                dispatch.unhighlight(prez_id);
+            });
+
 dispatch.on("highlight", function(prez_id) {
     // Make tooltip visible, put info into it and have it follow the cursor
     tooltip.transition()        
@@ -207,7 +215,23 @@ dispatch.on("highlight", function(prez_id) {
 
     // TODO: Change center picture to one of that prez
 
+    updatePicture(prez_id);
+
     // TODO: Color-highlight spans with text from that prez
+
+    c = color(prez_id);
+
+    d3.selectAll('.sentence')
+            .classed(c, function() {
+                pid = String(d3.select(this).attr("data-prez-id"));
+                console.log(pid);
+                if (pid == prez_id) {
+                    return true;
+                } else {
+                    return false;
+                }})
+
+    // TODO: Grow pie slice
 
 });
 
@@ -215,13 +239,20 @@ dispatch.on("unhighlight", function(prez_id) {
     // Make tooltip invisible
     tooltip.transition()        
         .duration(500)      
-        .style("opacity", 0);})
+        .style("opacity", 0);
 
     // TODO: Change center picture back to firstPrez
 
-    // TODO: Remove color-highlight from spans with text from that prez
+    updatePicture(firstPrez.id);
 
-;
+    // TODO: Remove color-highlight from spans with text from that prez
+    
+    c = color(prez_id);
+
+    d3.selectAll('.sentence')
+            .classed(c, false);
+
+});
 
         
         
