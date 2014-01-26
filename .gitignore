@@ -4,4 +4,4 @@ sotu.tar.gz
 *.pyc
 *.pyo
 dist/
-lib/SOTU/sotu/text/*
+data/SOTU/sotu/text/*
