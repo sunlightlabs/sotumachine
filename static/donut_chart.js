@@ -147,8 +147,6 @@ var testvar;
 
         new_data = parseIdWeightString(id_weight_string);
 
-        console.log(new_data);
-
         testvar = new_data;
          
         firstPrez = _.max(new_data, function(d){ return d.weight; });
@@ -165,6 +163,7 @@ var testvar;
         path.enter().append("path")
             .each(function(d, i) { this._current = findNeighborArc(i, data0, data1, key) || d; })
             .attr("class", function(d){ return color(d.data.id);})
+            .attr("id", function(d){ return "slice-"+d.data.id; })
           //.append("title")
             //.text(function(d) { return d.data.id; })
             .on("mouseover", function(d) {
@@ -224,14 +223,23 @@ dispatch.on("highlight", function(prez_id) {
     d3.selectAll('.sentence')
             .classed(c, function() {
                 pid = String(d3.select(this).attr("data-prez-id"));
-                console.log(pid);
                 if (pid == prez_id) {
                     return true;
                 } else {
                     return false;
-                }})
+                }});
 
     // TODO: Grow pie slice
+
+    donutChart.append('use')
+        .style('pointer-events', 'none')
+        .attr('xlink:href','#slice-'+prez_id)
+        .attr('transform', 'scale(0.85)');
+
+    donutChart.append('use')
+        .style('pointer-events', 'none')
+        .attr('xlink:href','#slice-'+prez_id)
+        .attr('transform', 'scale(1.10)');
 
 });
 
@@ -251,6 +259,12 @@ dispatch.on("unhighlight", function(prez_id) {
 
     d3.selectAll('.sentence')
             .classed(c, false);
+    
+    // TODO: Grow pie slice
+
+    donutChart.selectAll('use').remove();
+    //d3.selectAll('path[data-slice="'+prez_id+'"]')
+    //    .attr('transform', 'scale(1)');
 
 });
 
