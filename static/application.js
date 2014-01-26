@@ -78,16 +78,16 @@ $(function (){
                 console.log('processing data');
                 for (var i = 0; i < data.content.length; i++) {
 
-                    var pElem = $('<p>');
-                    pElem.addClass('prezColors');
+                    var pElem = $('<p>').addClass('prezColors');
 
                     for (var j = 0; j < data.content[i].length; j++) {
                         var sentence = data.content[i][j];
-                        var spanElem = $('<span>');
-                        spanElem.addClass('sentence');
-                        spanElem.attr('data-prez-id', sentence[0]);
-                        spanElem.text(sentence[1] + ' ');
-                        pElem.append(spanElem);
+                        pElem.append(
+                            $('<span>')
+                                .addClass('sentence')
+                                .attr('data-prez-id', sentence[0])
+                                .text(sentence[1] + ' ')
+                        );
                     }
 
                     speech.elem.append(pElem);
@@ -100,17 +100,18 @@ $(function (){
         });
     };
     Speech.prototype.randomIWS = function() {
-        var result = null;
+        var iws = null;
         $.ajax({
             url: '/iws',
             type: 'get',
             dataType: 'text',
             async: false,
             success: function(data) {
-                result = data;
+                iws = data;
             }
         });
-        return result;
+        console.log('random IWS: ' + iws);
+        return iws;
     };
     Speech.prototype.getIWS = function() {
         var iws = _.reduce(
@@ -121,6 +122,7 @@ $(function (){
             },
             ''
         );
+        console.log('IWS: ' + iws);
         return iws;
     };
 
