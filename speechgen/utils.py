@@ -42,7 +42,7 @@ def retokenize(output_list):
             add_string += ' '
         add_string += word
         output_string += add_string
-    return output_string
+    return output_string.replace('& mdash;','')
 
 def get_random_id_weight_string(statistics):
     id_weight_string = ""
