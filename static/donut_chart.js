@@ -1,14 +1,8 @@
-// DONUT CHART
+// EVENT DISPATCHER
 
-    var parseIdWeightString = function(idWeightString){
-        var parsedIdWeights = [];
-        _.each( _.range(0, idWeightString.length, 3), function(e,i,ls){ 
-                                                        parsedIdWeights.push({
-                                                            'id': idWeightString.substring(e,e+2),
-                                                            'weight': idWeightString.substring(e+2,e+3)
-                                                        });});
-        return parsedIdWeights;
-    };
+var dispatch = d3.dispatch("generate", "highlight");
+
+// DONUT CHART
 
 var presidents = {
   "01": "George Washington", 
@@ -21,6 +15,24 @@ var presidents = {
   "16": "Abraham Lincoln", 
   "26": "Theodore Roosevelt"
 };
+
+var testvar;
+
+    var parseIdWeightString = function(idWeightString){
+        var parsedIdWeights = [];
+        _.each( _.range(0, idWeightString.length, 3), function(e,i,ls){ 
+                                                        parsedIdWeights.push({
+                                                            'id': idWeightString.substring(e,e+2),
+                                                            'weight': idWeightString.substring(e+2,e+3)
+                                                        });});
+        parsedIdWeights.forEach(function(d) {
+                  d.id = d.id;
+                  d.weight = +d.weight;
+                  d.name = presidents[d.id];
+                });
+        return parsedIdWeights;
+    };
+
 
     var testIWS = '412433441264164423012403031';
    
@@ -48,7 +60,7 @@ var presidents = {
                 .innerRadius(pieOuterRadius);
 
     var pie = d3.layout.pie()
-            .sort(function(a, b) { return b.weight - a.weight; })
+            .sort(function(a,b){ return d3.ascending(a.id, b.id);})
                 .value(function(d) { return d.weight; });
 
     var svg = d3.select("#sotu-chart").append("svg")
@@ -72,66 +84,96 @@ var presidents = {
                 .attr("clip-path", "url(#clipCircle)");
     
     var updatePicture = function(id) { prezPicture.attr("xlink:href", "static/"+id+".jpg"); };
-//"url(#pattern-"+id+")"
+
+    function key(d) {
+      return d.data.id;
+    }
+
+    function type(d) {
+      d.weight = +d.weight;
+      return d;
+    }
+
+    function findNeighborArc(i, data0, data1, key) {
+      var d;
+      return (d = findPreceding(i, data0, data1, key)) ? {startAngle: d.endAngle, endAngle: d.endAngle}
+          : (d = findFollowing(i, data0, data1, key)) ? {startAngle: d.startAngle, endAngle: d.startAngle}
+          : null;
+    }
+
+    // Find the element in data0 that joins the highest preceding element in data1.
+    function findPreceding(i, data0, data1, key) {
+      var m = data0.length;
+      while (--i >= 0) {
+        var k = key(data1[i]);
+        for (var j = 0; j < m; ++j) {
+          if (key(data0[j]) === k) return data0[j];
+        }
+      }
+    }
+
+    // Find the element in data0 that joins the lowest following element in data1.
+    function findFollowing(i, data0, data1, key) {
+      var n = data1.length, m = data0.length;
+      while (++i < n) {
+        var k = key(data1[i]);
+        for (var j = 0; j < m; ++j) {
+          if (key(data0[j]) === k) return data0[j];
+        }
+      }
+    }
+
+    function arcTween(d) {
+      var i = d3.interpolate(this._current, d);
+      this._current = i(0);
+      return function(t) { return arc(i(t)); };
+    }
+
     var donutChart = svg.append("g")
+                .classed("prezColors", true)
                 .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-    
+   
+    var path = donutChart.selectAll("path"); 
 
-    var drawChart = function (idWeightString) {
-        data = parseIdWeightString(idWeightString);
+
+    dispatch.on("generate", function (id_weight_string) {
         
-        var picturePatterns = defs.selectAll("pattern")
-                 .data(data)
-                 .enter()
-                 .append("pattern")
-                 .attr("id", function(d){ return "pattern-"+d.id; })
-                 .attr("patternunits", "userSpaceOnUse")
-                 .attr("x",0)
-                 .attr("y",0)
-                 .attr("width", pictureRadius * 2)
-                 .attr("height", pictureRadius * 2)
-                 .append("image")
-                 .attr("x",0)
-                 .attr("y",0)
-                 .attr("width", pictureRadius * 2)
-                 .attr("height", pictureRadius * 2)
-                 .attr("xlink:href",function(d){ return "static/"+d.id+".jpg"; });
+        var new_data = parseIdWeightString(id_weight_string);
 
+        console.log(new_data);
 
-        firstPrez = d3.max(data, function(d){ d.weight; });
+        testvar = new_data;
+         
+        var firstPrez = _.max(new_data, function(d){ return d.weight; });
 
-        console.log(data);
+        updatePicture(firstPrez.id);        
+        
+        var data0 = path.data(),
+            data1 = pie(new_data);
 
-        data.forEach(function(d) {
-                  d.id = d.id;
-                  d.weight = +d.weight;
-                  d.name = presidents[d.id];
-                });
+        path = path.data(data1, key);
 
-        var arcs = donutChart.selectAll(".arc")
-                .data(pie(data))
-                .enter().append("g")
-                .classed("arc", true)
-                .classed("prezColors", true);
+        path.enter().append("path")
+            .each(function(d, i) { this._current = findNeighborArc(i, data0, data1, key) || d; })
+            .attr("class", function(d){ return color(d.data.id);})
+          .append("title")
+            .text(function(d) { return d.data.id; });
 
-        arcs.append("path")
-              .attr("d", arc)
-              //.style("fill", "#F45832");
-              .attr("class", function(d,i) { return color(d.data.id);});
+        path.exit()
+            .datum(function(d, i) { return findNeighborArc(i, data1, data0, key) || d; })
+          .transition()
+            .duration(750)
+            .attrTween("d", arcTween)
+            .remove();
 
-        /*
-        arcs.append("text")
-              .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
-              .attr("dy", ".35em")
-              .style("text-anchor", "middle")
-              .text(function(d) { return d.data.age; });
-        */
-    };
+        path.transition()
+            .duration(750)
+            .attrTween("d", arcTween);
+      });
 
         
         
 
 $(function (){
-    drawChart(testIWS);
-    updatePicture("44");
+    dispatch.generate(testIWS);
 });
