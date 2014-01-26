@@ -3,7 +3,8 @@ import json
 import os
 import uuid
 
-from flask import Flask, abort, jsonify, render_template, request
+import requests
+from flask import Flask, Response, abort, jsonify, render_template, request
 from raven.contrib.flask import Sentry
 from redis import Redis
 from rq import Queue
@@ -89,6 +90,13 @@ def generate_speech():
 @app.route('/iws', methods=['GET'])
 def random_iws():
     return get_random_id_weight_string(speech_stats)
+
+@app.route('/s/<speech_id>', methods=['GET'])
+def speech_proxy(speech_id):
+    path = '%s/%s/%s/%s.json' % (speech_id[0], speech_id[1], speech_id[2], speech_id[3:])
+    url = 'http://sotumachine.s3.amazonaws.com/speeches/%s' % path
+    resp = requests.get(url)
+    return Response(resp.content, mimetype='application/json')
 
 
 if __name__ == '__main__':

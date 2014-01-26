@@ -3,6 +3,7 @@
 {% block title %}State of the Union Machine - Sunlight Foundation{% endblock %}
 
 {% block head %}
+    <script src="static/html5shiv.js"></script>
     <script type="text/javascript" src="//use.typekit.net/cet2iqp.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 {% endblock %}
@@ -33,7 +34,7 @@
 
                 <section class="settings">
                     <form role="form" id="president-form">
-                        <span class="settings-title">SOTU Settings Title Thing</span>
+                        <span class="section-heading">SOTU Settings Title Thing</span>
                         <div class="form-group">
                             <label for="">Barack Obama</label>
                             <input type="range" class="form-control" min="0" max="5" step="1" value="7" name="" id="slider-44" data-prez-id="44">
@@ -117,25 +118,29 @@
             </div>
         </main>
 
-        <div style="visible:none">
-            <p>
-The State of the Union Machine uses models of language to randomly generate text based on different presidents&apos; previous speeches. These models are called &quot;n-gram models&quot; or &quot;Markov models,&quot; and are used in many places, from machine translation to DNA sequencing.
-            </p>
-
-            <p>
-The models are trained on a corpus of text, and they learn about the probability of a word given its preceding context. It&quot;s a bit like a robot that learns how to fill in the blanks. For instance: models trained on recent presidents have learned that the words <em>my fellow</em> are frequently followed by the word <em>Americans</em>.
-            </p>
-
-            <p>
-Our models were trained on previous State of the Union deliveries, which are <a href="http://www.presidency.ucsb.edu/sou.php">archived</a> by researchers at the University of California, Santa Barbara&apos;s <a href="http://www.presidency.ucsb.edu/index.php">American Presidency Project</a>. They were trained using the <a href="http://nltk.org/">Natural Language Toolkit</a>&apos;s language modeling tools. For more information on technical details, please visit our <a href="https://github.com/sunlightlabs/sotumachine">Github repo</a>!
-</p>
-        </div>
 
         <footer>
+            <div class="methodology">
+                <div class="content">
+                    <button type="button" class="close methodolgy-link" aria-hidden="true">&times;</button>
+                    <span class="section-heading">Methodology</span>
+                    <p>
+                        The State of the Union Machine uses models of language to randomly generate text based on different presidents&apos; previous speeches. These models are called &quot;n-gram models&quot; or &quot;Markov models,&quot; and are used in many places, from machine translation to DNA sequencing.
+                    </p>
+
+                    <p>
+                        The models are trained on a corpus of text, and they learn about the probability of a word given its preceding context. It&quot;s a bit like a robot that learns how to fill in the blanks. For instance: models trained on recent presidents have learned that the words <em>my fellow</em> are frequently followed by the word <em>Americans</em>.
+                    </p>
+
+                    <p>
+                        Our models were trained on previous State of the Union deliveries, which are <a href="http://www.presidency.ucsb.edu/sou.php">archived</a> by researchers at the University of California, Santa Barbara&apos;s <a href="http://www.presidency.ucsb.edu/index.php">American Presidency Project</a>. They were trained using the <a href="http://nltk.org/">Natural Language Toolkit</a>&apos;s language modeling tools. For more information on technical details, please visit our <a href="https://github.com/sunlightlabs/sotumachine">Github repo</a>!
+                    </p>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-sm-6 left">
                     <span class="footer-link">
-                        <a><span class="glyphicon glyphicon-book"></span> Read Our Methodology</a>
+                        <a class="methodolgy-link"><span class="glyphicon glyphicon-book"></span> Read Our Methodology</a>
                     </span>
                     <span class="footer-link">
                         <a href=""><span class="glyphicon glyphicon-download"></span> Download SOTUs from 1980&ndash;2013</a>
@@ -168,7 +173,7 @@ Our models were trained on previous State of the Union deliveries, which are <a 
 {% endblock %}
 
 {% block js %}
-    <!-- script src="static/chart.min.js"></script -->
+    <script src="static/respond.min.js"></script>
     <script src="static/underscore-min.js"></script>
     <script src="static/d3.v3.min.js"></script>
     <script src="static/donut_chart.js"></script>
