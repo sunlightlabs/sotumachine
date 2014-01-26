@@ -71,36 +71,46 @@ $(function (){
 
     function Speech(elem) {
         this.elem = $(elem);
+        this.iws = null;
+        this.id = null;
     };
     Speech.prototype.clear = function() {
         this.elem.empty();
     };
+    Speech.prototype.render = function(speech) {
+        this.clear();
+        for (var i = 0; i < speech.content.length; i++) {
+
+            var pElem = $('<p>').addClass('prezColors');
+
+            for (var j = 0; j < speech.content[i].length; j++) {
+                var sentence = speech.content[i][j];
+                pElem.append(
+                    $('<span>')
+                        .addClass('sentence')
+                        .attr('data-prez-id', sentence[0])
+                        .text(sentence[1])
+                ).append(' ');
+            }
+
+            this.elem.append(pElem);
+        }
+        console.log('done appending paragraphs');
+    };
     Speech.prototype.generate = function(iws) {
         var speech = this;
         iws = iws || this.getIWS();
-        this.clear();
         $.when(
         $.get(
             '/generate?iws=' + iws,
             function (data, status, xhr) {
                 console.log('processing data');
-                for (var i = 0; i < data.content.length; i++) {
-
-                    var pElem = $('<p>').addClass('prezColors');
-
-                    for (var j = 0; j < data.content[i].length; j++) {
-                        var sentence = data.content[i][j];
-                        pElem.append(
-                            $('<span>')
-                                .addClass('sentence')
-                                .attr('data-prez-id', sentence[0])
-                                .text(sentence[1] + ' ')
-                        );
-                    }
-
-                    speech.elem.append(pElem);
+                speech.render(data);
+                speech.id = data.id;
+                speech.iws = data.iws;
+                if (history && history.pushState) {
+                    history.pushState({'id': data.id, 'iws': data.iws}, '', '/#' + data.id);
                 }
-                console.log('done appending paragraphs');
             }
         )).then( function() {
             currentIWS = iws;
@@ -133,6 +143,13 @@ $(function (){
         console.log('IWS: ' + iws);
         return iws;
     };
+    Speech.prototype.reload = function(id) {
+        var speech = this;
+        console.log('reloading ' + id);
+        $.get('/s/' + id, function(data, status, xhr) {
+            speech.render(data);
+        });
+    };
 
     speech = new Speech('.the-speech-content');
 
@@ -141,6 +158,13 @@ $(function (){
         speech.generate();
     });
 
-    speech.generate();
+    console.log(window.location.hash);
+
+    if (window.location.hash) {
+        var id = window.location.hash.substring(1);
+        speech.reload(id);
+    } else {
+        speech.generate();
+    }
 
 });
