@@ -155,7 +155,7 @@ class SpeechWriter(object):
         self.update_stats()
         self.context = None
 
-        for i in xrange(self.speech_stats['avg_speech_length']):
+        for i in xrange(int(self.speech_stats['avg_speech_length'] * (1.0/3.0))):
             #great place to parallelize
             yield self.generate_paragraph(citations)
 
