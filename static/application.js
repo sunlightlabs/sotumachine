@@ -128,7 +128,9 @@ $(function (){
 
     $('a.generate-it').click(function(ev) {
         ev.preventDefault();
-        speech.generate()
+        speech.generate();
     });
+
+    speech.generate();
 
 });
