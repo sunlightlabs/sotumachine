@@ -1,20 +1,25 @@
 // EVENT DISPATCHER
 
-var dispatch = d3.dispatch("generate", "highlight");
+var dispatch = d3.dispatch("load", "generate", "highlight", "unhighlight");
 
 // DONUT CHART
 
 var presidents = {
-  "01": "George Washington", 
-  "03": "Thomas Jefferson", 
-  "40": "Ronald Reagan", 
-  "41": "George Bush", 
-  "42": "William J. Clinton", 
-  "43": "George W. Bush", 
-  "44": "Barack Obama", 
-  "16": "Abraham Lincoln", 
-  "26": "Theodore Roosevelt"
+  "01": {"name": "George Washington"}, 
+  "03": {"name": "Thomas Jefferson"}, 
+  "40": {"name": "Ronald Reagan"}, 
+  "41": {"name": "George Bush"}, 
+  "42": {"name": "William J. Clinton"}, 
+  "43": {"name": "George W. Bush"}, 
+  "44": {"name": "Barack Obama"}, 
+  "16": {"name": "Abraham Lincoln"}, 
+  "26": {"name": "Theodore Roosevelt"}
 };
+
+
+var tooltip = d3.select("body").append("div")   
+    .attr("class", "tooltip")               
+    .style("opacity", 0);
 
 var testvar;
 
@@ -28,7 +33,9 @@ var testvar;
         parsedIdWeights.forEach(function(d) {
                   d.id = d.id;
                   d.weight = +d.weight;
-                  d.name = presidents[d.id];
+                  d.name = presidents[d.id]['name'];
+                  // for reference in annotations, tooltips, etc
+                  presidents[d.id]['weight'] = +d.weight;
                 });
         return parsedIdWeights;
     };
@@ -60,6 +67,7 @@ var testvar;
                 .innerRadius(pieOuterRadius);
 
     var pie = d3.layout.pie()
+            //.sort(function(a, b){ return b.weight - a.weight;})
             .sort(function(a,b){ return d3.ascending(a.id, b.id);})
                 .value(function(d) { return d.weight; });
 
@@ -135,16 +143,19 @@ var testvar;
    
     var path = donutChart.selectAll("path"); 
 
+    
 
     dispatch.on("generate", function (id_weight_string) {
         
-        var new_data = parseIdWeightString(id_weight_string);
+        new_data = parseIdWeightString(id_weight_string);
 
         console.log(new_data);
 
         testvar = new_data;
          
         var firstPrez = _.max(new_data, function(d){ return d.weight; });
+
+        weight_total = d3.sum(new_data, function(d){ return d.weight; });
 
         updatePicture(firstPrez.id);        
         
@@ -156,8 +167,14 @@ var testvar;
         path.enter().append("path")
             .each(function(d, i) { this._current = findNeighborArc(i, data0, data1, key) || d; })
             .attr("class", function(d){ return color(d.data.id);})
-          .append("title")
-            .text(function(d) { return d.data.id; });
+          //.append("title")
+            //.text(function(d) { return d.data.id; })
+            .on("mouseover", function(d) {
+                dispatch.highlight(d.data.id);
+            })
+            .on("mouseout", function(d) {
+                dispatch.unhighlight(d.data.id);
+            });
 
         path.exit()
             .datum(function(d, i) { return findNeighborArc(i, data1, data0, key) || d; })
@@ -165,15 +182,51 @@ var testvar;
             .duration(750)
             .attrTween("d", arcTween)
             .remove();
-
+    
+        // TODO: Try to implement the weird unfurl thing on the first load
         path.transition()
             .duration(750)
             .attrTween("d", arcTween);
       });
 
+var init_button = d3.select('.btn-primary');
+
+init_button.on('click',function(){ dispatch.generate(testIWS);});
+
+dispatch.on("highlight", function(prez_id) {
+    // Make tooltip visible, put info into it and have it follow the cursor
+    tooltip.transition()        
+           .duration(200)      
+           .style("opacity", .9);      
+    
+    tooltip.html(  '<strong>'+ presidents[prez_id]['name']+'</strong>' + ":" + 
+                   '<br>' + 
+                   d3.round((presidents[prez_id]['weight']/weight_total) * 100) + "%")
+                .style("left", (d3.event.pageX) +7 + "px")     
+                .style("top", (d3.event.pageY) + "px");
+
+    // TODO: Change center picture to one of that prez
+
+    // TODO: Color-highlight spans with text from that prez
+
+});
+
+dispatch.on("unhighlight", function(prez_id) {
+    // Make tooltip invisible
+    tooltip.transition()        
+        .duration(500)      
+        .style("opacity", 0);})
+
+    // TODO: Change center picture back to firstPrez
+
+    // TODO: Remove color-highlight from spans with text from that prez
+
+;
+
         
         
 
 $(function (){
+    //dispatch.generate('410430440260160420010400030');
     dispatch.generate(testIWS);
 });
