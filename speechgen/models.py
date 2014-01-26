@@ -162,13 +162,15 @@ class SpeechWriter(object):
     def generate_paragraph(self, citations):
         paragraph = []
         prez_id = self.principal
+        sentence = self._presidents[prez_id].next_sent(self.context)
+        paragraph.append((prez_id, retokenize(sentence)))
         for i in xrange(num_wiggle(self.speech_stats['avg_para_length'])):
+            self.context = sentence[-1:]
             sentence = self._presidents[prez_id].next_sent(self.context)
             if citations:
                 paragraph.append((prez_id, retokenize(sentence)))
             else:
                 paragraph.append(retokenize(sentence))
-            self.context = sentence[-1:]
             prez_id = random.choice(self.labelpopulation)
         return paragraph
 

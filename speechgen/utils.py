@@ -27,9 +27,9 @@ def retokenize(output_list):
             pre_space = False
         elif word.isalnum():
             pre_space = True
-        elif word in ['Dr.', 'Mr.', 'Mrs.', 'M.']:
+        elif word in ['Dr.', 'Mr.', 'Mrs.', 'M.', '$']:
             pre_space = True
-        elif (word[0].isalnum()) and (word[-1].isalnum()) and (('-' in word) or ('.' in word)):
+        elif (word[0].isalnum()) and (word[-1].isalnum()) and (('-' in word) or ('.' in word)or (',' in word)):
             pre_space = True
         elif word[:-1].isalpha():
             pre_space = True
