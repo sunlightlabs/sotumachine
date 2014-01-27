@@ -427,8 +427,33 @@ footer.active {
     background-color: #eee;
     border: 1px solid #ddd;
     margin-bottom: 1px;
-    padding: 2px 4px;
+    padding: 4px 9px;
     font-family: "proxima-nova-condensed", sans-serif;
+}
+ul.social-follow{ 
+    list-style-type: none;
+    padding: 0;
+}
+.social-follow li{
+    display: inline-block;
+}
+.social-follow a {
+    background-image: url('/static/social_share_sprites_single.png');
+    height: 24px;
+    display: block;
+    padding-left: 30px;
+    background-repeat: no-repeat;
+    margin-right: 10px;
+}
+.social-follow .facebook {
+    background-position: 0 -50px;
+}
+
+.social-follow .twitter{
+    background-position: 0 0;
+}
+.social-follow .googleplus{
+    background-position: 0 -25px;
 }
 
 
