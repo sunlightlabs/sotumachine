@@ -105,30 +105,44 @@
 
         <footer>
             <div class="methodology">
-                <div class="content">
+                <div class="content row">
                     <button type="button" class="close methodolgy-link" aria-hidden="true">&times;</button>
-                    <span class="section-heading">Methodology</span>
-                    <p>
-                        The State of the Union Machine uses models of language to randomly generate text based on different presidents&apos; previous speeches. These models are called &quot;n-gram models&quot; or &quot;Markov models,&quot; and are used in many places, from machine translation to DNA sequencing. There is one model for each president, and each sentence is generated using a single model, using inputs from the previous sentence as context.
-                    </p>
+                    <div class="col-sm-6 col-md-6 col-lg-4 col-lg-offset-1">
+                        <h4 class="section-heading">Methodology</h4>
+                        <p>
+                            The State of the Union Machine uses models of language to randomly generate text based on different presidents&apos; previous speeches. These models are called &quot;n-gram models&quot; or &quot;Markov models,&quot; and are used in many places, from machine translation to DNA sequencing. There is one model for each president, and each sentence is generated using a single model, using inputs from the previous sentence as context.
+                        </p>
 
-                    <p>
-                        The models are trained on a corpus of text, and they learn about the probability of a word given its preceding context. It&quot;s a bit like a robot that learns how to fill in the blanks. For instance: models trained on recent presidents have learned that the words <em>my fellow</em> are frequently followed by the word <em>Americans</em>.
-                    </p>
+                        <p>
+                            The models are trained on a corpus of text, and they learn about the probability of a word given its preceding context. It&quot;s a bit like a robot that learns how to fill in the blanks. For instance: models trained on recent presidents have learned that the words <em>my fellow</em> are frequently followed by the word <em>Americans</em>.
+                        </p>
 
-                    <p>
-                        Our models were trained on previous State of the Union deliveries, which are <a href="http://www.presidency.ucsb.edu/sou.php">archived</a> by researchers at the University of California, Santa Barbara&apos;s <a href="http://www.presidency.ucsb.edu/index.php">American Presidency Project</a>. They were trained using the <a href="http://nltk.org/">Natural Language Toolkit</a>&apos;s language modeling tools. For more information on technical details, please visit our <a href="https://github.com/sunlightlabs/sotumachine">Github repo</a>!
-                    </p>
-                    <span class="section-heading">About the Sunlight Foundation</span>
-                    <p>
-                        Sunlight Foundation is a nonpartisan nonprofit <a href="http://www.washingtonpost.com/wp-dyn/content/article/2006/04/25/AR2006042501699.html">founded in 2006</a> that uses the power of the Internet to catalyze greater government openness and transparency. We do so by creating <a href="http://sunlightfoundation.com/projects/">tools</a>, <a href="http://sunlightfoundation.com/api/">open data</a>, <a href="http://sunlightfoundation.com/policy/">policy recommendations</a>, <a href="http://reporting.sunlightfoundation.com">journalism</a> and <a href="http://sunlightfoundation.com/opengovgrants">grant opportunities</a> to dramatically expand access to vital government information to create accountability of our public officials. Our vision is to use technology to enable more complete, equitable and effective democratic participation.
-                    </p>
+                        <p>
+                            Our models were trained on previous State of the Union deliveries, which are <a href="http://www.presidency.ucsb.edu/sou.php">archived</a> by researchers at the University of California, Santa Barbara&apos;s <a href="http://www.presidency.ucsb.edu/index.php">American Presidency Project</a>. They were trained using the <a href="http://nltk.org/">Natural Language Toolkit</a>&apos;s language modeling tools. For more information on technical details, please visit our <a href="https://github.com/sunlightlabs/sotumachine">Github repo</a>!
+                        </p>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-4 col-lg-offset-1">
+                        <h4 class="section-heading">About the Sunlight Foundation</h4>
+                        <p>
+                            Sunlight Foundation is a nonpartisan nonprofit <a href="http://www.washingtonpost.com/wp-dyn/content/article/2006/04/25/AR2006042501699.html">founded in 2006</a> that uses the power of the Internet to catalyze greater government openness and transparency. We do so by creating <a href="http://sunlightfoundation.com/projects/">tools</a>, <a href="http://sunlightfoundation.com/api/">open data</a>, <a href="http://sunlightfoundation.com/policy/">policy recommendations</a>, <a href="http://reporting.sunlightfoundation.com">journalism</a> and <a href="http://sunlightfoundation.com/opengovgrants">grant opportunities</a> to dramatically expand access to vital government information to create accountability of our public officials. Our vision is to use technology to enable more complete, equitable and effective democratic participation.
+                        </p>
+                    
+                        <h4 class="section-heading">Like this Project and Want to Discover Others Like It?</h4>
+                        <p class="tip">Join the Sunlight Foundation's open government community to learn more</p>
+                        <form action="/subscribe/" method="post" id="sfapp-subscribe-form" class="form-inline">
+                            <div style="display:none"><input type="hidden" name="csrfmiddlewaretoken" value="gevL982RmIfYEQ9rQ5YGRWHUAncXnT9z"></div>
+                            <input type="hidden" name="response" value="json">
+                            <input type="text" name="email" placeholder="your email address">
+                            <input type="text" name="zipcode" placeholder="your zip code">
+                            <button type="submit" class="btn btn-sunlight">Sign Up</button>
+                        </form>
+                    </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-6 left">
                     <span class="footer-link">
-                        <a class="methodolgy-link"><span class="glyphicon glyphicon-book"></span> Read Our Methodology</a>
+                        <a class="methodolgy-link"><span class="glyphicon glyphicon-book"></span> About SOTU machine</a>
                     </span>
                     <span class="footer-link">
                         <a href="https://github.com/sunlightlabs/sotumachine"><span class="glyphicon glyphicon-download"></span> Find the SOTUs from 1980&ndash;2013 on our GitHub page</a>
@@ -136,10 +150,7 @@
                 </div>
 
                 <div class="col-sm-6 hidden-xs right">
-                    <span class="footer-link">
-                        <a id="permalink"><span class="glyphicon glyphicon-link"></span> Get Permalink</a>
-                    </span>
-                    <span class="footer-link">
+                    <span class="footer-link" style="padding-right: 10px">
 
                         <!-- Social Media Placeholders -->
                         <!-- Replace all this -->
