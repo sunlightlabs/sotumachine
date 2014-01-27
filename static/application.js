@@ -195,7 +195,7 @@ $(function (){
             .attr('data-socialite', 'auto')
             .attr('data-services', 'twitter,facebook')
             .attr('data-twitter-options', 'related=sunfoundation&text=A%20dash%20of%20Obama%2C%20a%20touch%20of%20Reagan%2C%20add%20some%20Lincoln%20and%20GO!%20Create%20your%20own%20%23SOTU%20with%20%23SOTUmachine&image=http%3A%2F%2Fsotumachine.s3.amazonaws.com%2Ftwitter-24.png')
-            .attr('data-facebook-option', 'image=http%3A%2F%2Fsotumachine.s3.amazonaws.com%2Ffacebook-24.png')
+            .attr('data-facebook-options', 'image=http%3A%2F%2Fsotumachine.s3.amazonaws.com%2Ffacebook-24.png')
             .appendTo($('.social-buttons').empty())
             .trigger('register');
     }
