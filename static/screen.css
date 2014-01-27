@@ -152,6 +152,7 @@ body {
 
 /* form and fancy schmancy range sliders */
 
+.form-control { background-color: #434c51; }
 .settings form {
     padding-top: 2em;
 }
@@ -177,7 +178,6 @@ body {
 input[type="range"] {
     -webkit-appearance: none;
     -moz-apperance: none;
-    border-radius: 6px;
     height: 5px;
     padding: 0;
     background-image: -webkit-gradient(
@@ -204,6 +204,14 @@ input[type='range']::-webkit-slider-thumb {
     width: 6px;
     cursor: pointer;
 }        
+input[type='range']::-ms-fill-lower {background: #c9a706; }
+input[type='range']::-ms-fill-upper {background: #333; }
+input[type='range']::-ms-thumb {background: #fff; height: 13px; width: 6px;}
+input[type='range']::-ms-track {border: none;}
+
+input[type='range']::-moz-range-thumb {background: #fff; height: 13px; width: 6px; border: none; border-radius: 0;}
+input[type='range']::-moz-range-track {border: 1px solid #434c51; background: #333;}
+/*input[type='range']::-moz-ticks-after {display: none;}*/
 
 div.tooltip {   
   position: absolute;           
