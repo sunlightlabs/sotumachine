@@ -213,13 +213,7 @@ input[type="range"] {
     -moz-apperance: none;
     height: 5px;
     padding: 0;
-    background-image: -webkit-gradient(
-            linear,
-            left top,
-            right top,
-            color-stop(0.3, #c9a706),
-            color-stop(0.3, #333)
-        );
+    background: #333;
     /*border-radius*/
     -webkit-border-radius: 0;
        -moz-border-radius: 0;
