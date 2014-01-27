@@ -6,26 +6,26 @@ window.dispatch = d3.dispatch("load", "generated", "highlight", "unhighlight");
 // DONUT CHART
 
 var presidents = {
-  "01": {"name": "George Washington"}, 
-  "03": {"name": "Thomas Jefferson"}, 
-  "40": {"name": "Ronald Reagan"}, 
-  "41": {"name": "George Bush"}, 
-  "42": {"name": "William J. Clinton"}, 
-  "43": {"name": "George W. Bush"}, 
-  "44": {"name": "Barack Obama"}, 
-  "16": {"name": "Abraham Lincoln"}, 
+  "01": {"name": "George Washington"},
+  "03": {"name": "Thomas Jefferson"},
+  "40": {"name": "Ronald Reagan"},
+  "41": {"name": "George Bush"},
+  "42": {"name": "William J. Clinton"},
+  "43": {"name": "George W. Bush"},
+  "44": {"name": "Barack Obama"},
+  "16": {"name": "Abraham Lincoln"},
   "26": {"name": "Theodore Roosevelt"}
 };
 
-var tooltip = d3.select("body").append("div")   
-    .attr("class", "tooltip")               
+var tooltip = d3.select("body").append("div")
+    .attr("class", "tooltip")
     .style("opacity", 0);
 
 var testvar;
 
 var parseIdWeightString = function(idWeightString){
     var parsedIdWeights = [];
-    _.each( _.range(0, idWeightString.length, 3), function(e,i,ls){ 
+    _.each( _.range(0, idWeightString.length, 3), function(e,i,ls){
                                                     parsedIdWeights.push({
                                                         'id': idWeightString.substring(e,e+2),
                                                         'weight': idWeightString.substring(e+2,e+3)
@@ -50,11 +50,11 @@ var width = parseInt(chartDiv.style("width")),
     pieInnerRadius = radius - 30,
     pieOuterRadius = radius - 10,
     pictureRadius = radius - 40;
-                    
+
 var color_classes = [];
-_.each( _.keys(presidents), 
-       function(e, i, ls) { 
-         color_classes.push('q' + i + '-' + _.keys(presidents).length); 
+_.each( _.keys(presidents),
+       function(e, i, ls) {
+         color_classes.push('q' + i + '-' + _.keys(presidents).length);
             });
 
 var color = d3.scale.ordinal()
@@ -75,7 +75,7 @@ var svg = d3.select("#sotu-chart").append("svg")
             .attr("height", height);
 
 var defs = svg.append("defs");
-            
+
 var clipPath = svg.append("clipPath")
        .attr("id", "clipCircle")
        .append("circle")
@@ -83,14 +83,17 @@ var clipPath = svg.append("clipPath")
        .attr("cx", 60)
        .attr("cy", 60);
 
-var prezPicture = svg.append("g") 
+var prezPicture = svg.append("g")
             .attr("transform", "translate(" + ((width / 2) - pictureRadius) + "," + ((height / 2) - pictureRadius) + ")")
             .append("image")
             .attr("width", function(){ return pictureRadius * 2;})
             .attr("height", function(){ return pictureRadius * 2;})
             .attr("clip-path", "url(#clipCircle)");
 
-var updatePicture = function(id) { prezPicture.attr("xlink:href", "static/"+id+".jpg"); };
+var updatePicture = function(id) {
+  var ext = (id == null) ? "png" : "jpg";
+  prezPicture.attr("xlink:href", "static/"+id+"." + ext);
+};
 
 function key(d) {
   return d.data.id;
@@ -140,10 +143,10 @@ var donutChart = svg.append("g")
             .classed("prezColors", true)
             .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-var path = donutChart.selectAll("path"); 
+var path = donutChart.selectAll("path");
 
-var firstPrezID;   
-    
+var firstPrezID;
+
 var sentenceHighlighting = function() {
     d3.selectAll('.sentence')
             .on('mouseover', function(d) {
@@ -161,15 +164,15 @@ dispatch.on("generated", function (id_weight_string) {
     new_data = parseIdWeightString(id_weight_string);
 
     sentenceHighlighting();
-    
+
     testvar = new_data;
-     
+
     firstPrezID = d3.select('.the-speech p:first-of-type span:first-of-type').attr('data-prez-id');
 
     weight_total = d3.sum(new_data, function(d){ return d.weight; });
 
-    updatePicture(firstPrezID);        
-    
+    updatePicture(firstPrezID);
+
     var data0 = path.data(),
         data1 = pie(new_data);
 
@@ -204,14 +207,14 @@ dispatch.on("generated", function (id_weight_string) {
 
 dispatch.on("highlight", function(prez_id) {
     // Make tooltip visible, put info into it and have it follow the cursor
-    tooltip.transition()        
-           .duration(200)      
-           .style("opacity", .9);      
-    
-    tooltip.html(  '<strong>'+ presidents[prez_id]['name']+'</strong>' + ":" + 
-                   '<br>' + 
+    tooltip.transition()
+           .duration(200)
+           .style("opacity", .9);
+
+    tooltip.html(  '<strong>'+ presidents[prez_id]['name']+'</strong>' + ":" +
+                   '<br>' +
                    d3.round((presidents[prez_id]['weight']/weight_total) * 100) + "%")
-                .style("left", (d3.event.pageX) +7 + "px")     
+                .style("left", (d3.event.pageX) +7 + "px")
                 .style("top", (d3.event.pageY) + "px");
 
     // TODO: Change center picture to one of that prez
@@ -247,8 +250,8 @@ dispatch.on("highlight", function(prez_id) {
 
 dispatch.on("unhighlight", function(prez_id) {
     // Make tooltip invisible
-    tooltip.transition()        
-        .duration(500)      
+    tooltip.transition()
+        .duration(500)
         .style("opacity", 0);
 
     // TODO: Change center picture back to firstPrez
@@ -256,12 +259,12 @@ dispatch.on("unhighlight", function(prez_id) {
     updatePicture(firstPrezID);
 
     // TODO: Remove color-highlight from spans with text from that prez
-    
+
     c = color(prez_id);
 
     d3.selectAll('.sentence')
             .classed(c, false);
-    
+
     // TODO: Grow pie slice
 
     donutChart.selectAll('use').remove();
@@ -270,7 +273,7 @@ dispatch.on("unhighlight", function(prez_id) {
 
 });
 
-  
-dispatch.generated(testIWS);        
+
+dispatch.generated(testIWS);
 
 });
