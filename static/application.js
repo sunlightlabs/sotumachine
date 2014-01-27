@@ -153,10 +153,9 @@ $(function (){
 
     speech = new Speech('.the-speech-content');
 
-    $('a.generate-it').click(function(ev) {
-        ev.preventDefault();
+    $("#president-form input[type=range]").change(function(ev) {
         speech.generate();
-    });
+    })
 
     console.log(window.location.hash);
 
