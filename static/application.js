@@ -112,7 +112,7 @@ $(function (){
                     speech.iws = data.iws;
                     if (history && history.pushState) {
                         history.pushState({'id': data.id, 'iws': data.iws}, '', '/#' + data.id);
-                        $('link[rel=canonical]').attr('href', window.location);
+                        // $('link[rel=canonical]').attr('href', window.location);
                         if (twttr) { twttr.widgets.load(); }
                     }
                 }
@@ -188,7 +188,7 @@ $(function (){
             speech.clear();
             speech.reload(id);
         }
-        $('link[rel=canonical]').attr('href', window.location);
+        // $('link[rel=canonical]').attr('href', window.location);
         if (twttr) { twttr.widgets.load(); }
     });
 
@@ -196,6 +196,7 @@ $(function (){
         var id = window.location.hash.substring(1);
         speech.reload(id);
     } else {
+        speech.updateSliders(speech.randomIWS());
         speech.generate();
     }
 

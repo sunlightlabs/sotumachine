@@ -6,7 +6,6 @@
     <script src="static/html5shiv.js"></script>
     <script type="text/javascript" src="//use.typekit.net/cet2iqp.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-    <link rel="canonical" href="http://sotu.sunlightfoundation.com">
 {% endblock %}
 
 {% block og %}
@@ -28,7 +27,11 @@
         <aside id="sidebar">
             <div class="sidebar-wrapper active">
                 <section class="splash">
+<<<<<<< HEAD
+                    <h1 class="sotu-logo">State of the Union Machine</h1>
+=======
                     <h1 class="sotu-logo img-responsive">State of the Union Machine</h1>
+>>>>>>> afb9a4b91b96489bc768e0e649be5208929c85d1
 
                     <div class="info">
                         <p class="prezColors">Randomly generate a unique State of Union based on language modeling of the speeches from previous presidents. Learn more about the nonpartisan <a href="http://sunlightfoundation.com">Sunlight Foundation</a> and <a href="http://sunlightfoundation.com/tools">our tools here</a>. Enjoy! </p>
@@ -150,7 +153,7 @@
                         <a class="methodolgy-link"><span class="glyphicon glyphicon-book"></span> About SOTU machine</a>
                     </span>
                     <span class="footer-link">
-                        <a href="https://github.com/sunlightlabs/sotumachine"><span class="glyphicon glyphicon-download"></span> Find the SOTUs from 1980&ndash;2013 on our GitHub page</a>
+                        <a href="https://github.com/sunlightlabs/sotumachine"><span class="glyphicon glyphicon-download"></span> See the SOTU Machine code on GitHub</a>
                     </span>
                 </div>
 
@@ -160,7 +163,8 @@
                         <!-- Social Media Placeholders -->
                         <!-- Replace all this -->
 
-                        <a href="https://twitter.com/share" class="twitter-share-button" data-lang="en" data-counturl="http://sotu.sunlightfoundation.com" data-related="sunfoundation" data-hashtags="SOTUmachine" data-text="A dash of Obama, a touch of Reagan, add some Lincoln and GO! Create your own #SOTU with">Tweet</a>
+                        <a href="https://twitter.com/share" class="twitter-share-button" data-lang="en" data-counturl="http://sotu.sunlightfoundation.com" data-related="sunfoundation" data-text="A dash of Obama, a touch of Reagan, add some Lincoln and GO! Create your own #SOTU with #SOTUmachine">Tweet</a>
+                        <div class="fb-like" data-width="40" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
 
                         <!--
                         <a><span class="glyphicon glyphicon-thumbs-up"></span> Like</a>
@@ -171,6 +175,8 @@
 
                     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
                 </div>
+
+                <div id="fb-root"></div>
 
             </div>
         </footer>
@@ -187,4 +193,11 @@
     <script src="static/donut_chart.js"></script>
     <script src="static/application.js"></script>
 	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+	<script>(function(d, s, id) {
+  		var js, fjs = d.getElementsByTagName(s)[0];
+  		if (d.getElementById(id)) return;
+  		js = d.createElement(s); js.id = id;
+  		js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=522198934532359";
+  		fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script>
 {% endblock %}
