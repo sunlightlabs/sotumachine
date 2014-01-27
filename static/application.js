@@ -73,18 +73,28 @@ $(function (){
     $(window).on('resize', updateFooterWidth);
     updateFooterWidth();
 
+
     function updateMethologyHeight() {
-        console.log($(this).height() - 100);
         $('.methodology.active').css('max-height', $(this).height() - 100);
     }
+
     $(window).on('resize', updateMethologyHeight);
-    updateMethologyHeight();
+
+    function resetMethologyHeight() {
+        $('.methodology').css('max-height', 0);
+    }
 
     // toggle methodology
 
     $('.methodolgy-link').click(function() {
-      $('.methodology').toggleClass('active');
-      $footer.toggleClass('active');
+
+        $('.methodology').toggleClass('active');
+        if ($('.methodology').hasClass('active')) {
+            updateMethologyHeight();
+        } else {
+            resetMethologyHeight();
+        }      
+        $footer.toggleClass('active');
     });
 
     // speech
