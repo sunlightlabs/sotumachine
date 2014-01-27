@@ -3,6 +3,7 @@
 {% block title %}State of the Union Machine - Sunlight Foundation{% endblock %}
 
 {% block head %}
+	<script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
     <script src="/static/html5shiv.js"></script>
     <script type="text/javascript" src="//use.typekit.net/cet2iqp.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
@@ -133,8 +134,7 @@
 
                         <h4 class="section-heading">Like this Project and Want to Discover Others Like It?</h4>
                         <p class="tip">Join the Sunlight Foundation's open government community to learn more</p>
-                        <form action="/subscribe/" method="post" id="sfapp-subscribe-form" class="form-inline">
-                            <div style="display:none"><input type="hidden" name="csrfmiddlewaretoken" value="gevL982RmIfYEQ9rQ5YGRWHUAncXnT9z"></div>
+                        <form action="/subscribe" method="post" id="sfapp-subscribe-form" class="form-inline">
                             <input type="hidden" name="response" value="json">
                             <input type="text" name="email" placeholder="your email address">
                             <input type="text" name="zipcode" placeholder="your zip code">
@@ -196,4 +196,20 @@
   		js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=522198934532359";
   		fjs.parentNode.insertBefore(js, fjs);
 		}(document, 'script', 'facebook-jssdk'));</script>
+	<script>
+	  var _sf_async_config = { uid: 980, domain: 'sotu.sunlightfoundation.com', useCanonical: true };
+	  (function() {
+	    function loadChartbeat() {
+	      window._sf_endpt = (new Date()).getTime();
+	      var e = document.createElement('script');
+	      e.setAttribute('language', 'javascript');
+	      e.setAttribute('type', 'text/javascript');
+	      e.setAttribute('src','//static.chartbeat.com/js/chartbeat.js');
+	      document.body.appendChild(e);
+	    };
+	    var oldonload = window.onload;
+	    window.onload = (typeof window.onload != 'function') ?
+	      loadChartbeat : function() { oldonload(); loadChartbeat(); };
+	  })();
+	</script>
 {% endblock %}
