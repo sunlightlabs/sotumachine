@@ -112,10 +112,15 @@ $(function (){
                     speech.iws = data.iws;
                     if (history && history.pushState) {
                         history.pushState({'id': data.id, 'iws': data.iws}, '', '/#' + data.id);
+                        $('link[rel=canonical]').attr('href', window.location);
+                        if (twttr) { twttr.widgets.load(); }
                     }
                 }
             )
-        ).then(function() { dispatch.generated(iws); });
+        ).then(function() {
+            dispatch.generated(iws);
+            $('')
+        });
     };
     Speech.prototype.randomIWS = function() {
         var iws = null;
@@ -183,6 +188,8 @@ $(function (){
             speech.clear();
             speech.reload(id);
         }
+        $('link[rel=canonical]').attr('href', window.location);
+        if (twttr) { twttr.widgets.load(); }
     });
 
     if (window.location.hash) {
