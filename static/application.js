@@ -73,6 +73,13 @@ $(function (){
     $(window).on('resize', updateFooterWidth);
     updateFooterWidth();
 
+    function updateMethologyHeight() {
+        console.log($(this).height() - 100);
+        $('.methodology.active').css('max-height', $(this).height() - 100);
+    }
+    $(window).on('resize', updateMethologyHeight);
+    updateMethologyHeight();
+
     // toggle methodology
 
     $('.methodolgy-link').click(function() {
