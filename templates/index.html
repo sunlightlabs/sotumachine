@@ -6,20 +6,19 @@
     <script src="static/html5shiv.js"></script>
     <script type="text/javascript" src="//use.typekit.net/cet2iqp.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <link rel="canonical" href="http://sotu.sunlightfoundation.com">
 {% endblock %}
 
-{% block ga %}
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-22821126-41', 'sunlightfoundation.com');
-  ga('send', 'pageview');
-
-</script>
+{% block og %}
+	<meta property="og:site_name" content="Sunlight Foundation">
+	<meta property="og:title" content="SOTU Machine">
+	<meta property="og:description" content="A dash of Obama, a touch of Reagan, add some Lincoln and GO! Create your own SOTU with SOTU Machine.">
+	<meta property="og:type" content="website">
+	<meta property="og:image" content="http://assets.sunlightfoundation.com/external/facebook/sflogox180-2012.jpg">
+	<meta property="fb:admins" content="7812952">
 {% endblock %}
+
+{% block ga %}UA-22821126-41{% endblock %}
 
 {% block css %}
     <link rel="stylesheet" href="static/screen.css"/>
@@ -134,7 +133,7 @@
                         <p>
                             Sunlight Foundation is a nonpartisan nonprofit <a href="http://www.washingtonpost.com/wp-dyn/content/article/2006/04/25/AR2006042501699.html">founded in 2006</a> that uses the power of the Internet to catalyze greater government openness and transparency. We do so by creating <a href="http://sunlightfoundation.com/projects/">tools</a>, <a href="http://sunlightfoundation.com/api/">open data</a>, <a href="http://sunlightfoundation.com/policy/">policy recommendations</a>, <a href="http://reporting.sunlightfoundation.com">journalism</a> and <a href="http://sunlightfoundation.com/opengovgrants">grant opportunities</a> to dramatically expand access to vital government information to create accountability of our public officials. Our vision is to use technology to enable more complete, equitable and effective democratic participation.
                         </p>
-                    
+
                         <h4 class="section-heading">Like this Project and Want to Discover Others Like It?</h4>
                         <p class="tip">Join the Sunlight Foundation's open government community to learn more</p>
                         <form action="/subscribe/" method="post" id="sfapp-subscribe-form" class="form-inline">
@@ -163,9 +162,13 @@
                         <!-- Social Media Placeholders -->
                         <!-- Replace all this -->
 
+                        <a href="https://twitter.com/share" class="twitter-share-button" data-lang="en" data-counturl="http://sotu.sunlightfoundation.com" data-related="sunfoundation" data-hashtags="SOTUmachine" data-text="A dash of Obama, a touch of Reagan, add some Lincoln and GO! Create your own #SOTU with">Tweet</a>
+
+                        <!--
                         <a><span class="glyphicon glyphicon-thumbs-up"></span> Like</a>
                         &nbsp; &nbsp; &nbsp; &nbsp;
                         <a><span class="glyphicon glyphicon-thumbs-up"></span> Tweet</a>
+                        -->
                     </span>
 
                     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
@@ -185,4 +188,5 @@
     <script src="static/d3.v3.min.js"></script>
     <script src="static/donut_chart.js"></script>
     <script src="static/application.js"></script>
+	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 {% endblock %}
