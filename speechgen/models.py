@@ -158,7 +158,7 @@ class SpeechWriter(object):
         self.update_stats()
         self.context = None
 
-        for i in xrange(int(self.speech_stats['avg_speech_length'] * (1.0/3.0))):
+        for i in xrange(int(15)):
             #great place to parallelize
             yield self.generate_paragraph(citations)
 
@@ -168,7 +168,7 @@ class SpeechWriter(object):
         sentence = self._presidents[prez_id].next_sent(self.context)
         paragraph.append((prez_id, retokenize(sentence)))
         for i in xrange(num_wiggle(self.speech_stats['avg_para_length'])):
-            self.context = sentence[-1:]
+            self.context = sentence[-2:]
             sentence = self._presidents[prez_id].next_sent(self.context)
             if citations:
                 paragraph.append((prez_id, retokenize(sentence)))

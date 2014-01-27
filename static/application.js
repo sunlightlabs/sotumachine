@@ -101,21 +101,19 @@ $(function (){
         var speech = this;
         iws = iws || this.getIWS();
         $.when(
-        $.get(
-            '/generate?iws=' + iws,
-            function (data, status, xhr) {
-                console.log('processing data');
-                speech.render(data);
-                speech.id = data.id;
-                speech.iws = data.iws;
-                if (history && history.pushState) {
-                    history.pushState({'id': data.id, 'iws': data.iws}, '', '/#' + data.id);
+            $.get(
+                '/generate?iws=' + iws,
+                function (data, status, xhr) {
+                    console.log('processing data');
+                    speech.render(data);
+                    speech.id = data.id;
+                    speech.iws = data.iws;
+                    if (history && history.pushState) {
+                        history.pushState({'id': data.id, 'iws': data.iws}, '', '/#' + data.id);
+                    }
                 }
-            }
-        )).then( function() {
-            currentIWS = iws;
-            dispatch.generated(currentIWS);
-        });
+            )
+        ).then(function() { dispatch.generated(iws); });
     };
     Speech.prototype.randomIWS = function() {
         var iws = null;
@@ -146,8 +144,20 @@ $(function (){
     Speech.prototype.reload = function(id) {
         var speech = this;
         console.log('reloading ' + id);
-        $.get('/s/' + id, function(data, status, xhr) {
-            speech.render(data);
+        $.when(
+            $.get('/s/' + id, function(data, status, xhr) {
+                speech.id = data.id;
+                speech.iws = data.iws;
+                speech.render(data);
+                speech.updateSliders(speech.iws);
+            })
+        ).then(function() { dispatch.generated(speech.iws); });
+
+    };
+    Speech.prototype.updateSliders = function(iws) {
+        $('#president-form input').each(function(index, elem) {
+            var val = parseInt(iws[(index * 3) + 2]);
+            $(elem).val(val).trigger('change');
         });
     };
 
@@ -157,7 +167,13 @@ $(function (){
         speech.generate();
     })
 
-    console.log(window.location.hash);
+    $(window).bind('popstate', function() {
+        if (window.location.hash) {
+            var id = window.location.hash.substring(1);
+            speech.clear();
+            speech.reload(id);
+        }
+    });
 
     if (window.location.hash) {
         var id = window.location.hash.substring(1);
