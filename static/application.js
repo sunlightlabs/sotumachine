@@ -93,7 +93,7 @@ $(function (){
             updateMethologyHeight();
         } else {
             resetMethologyHeight();
-        }      
+        }
         $footer.toggleClass('active');
     });
 
@@ -179,14 +179,23 @@ $(function (){
     Speech.prototype.reload = function(id) {
         var speech = this;
         console.log('reloading ' + id);
+        var path = id[0] + '/' + id[1] + '/' + id[2] + '/' + id.substring(3) + '.json';
+        var url = 'http://s3.amazonaws.com/sotumachine/speeches/' + path;
         $.when(
-            $.get('/s/' + id, function(data, status, xhr) {
+            $.get(url, function(data, status, xhr) {
                 speech.id = data.id;
                 speech.iws = data.iws;
                 speech.render(data);
                 speech.updateSliders(speech.iws);
                 speech.createShareButtons();
             })
+            // $.get('/s/' + id, function(data, status, xhr) {
+            //     speech.id = data.id;
+            //     speech.iws = data.iws;
+            //     speech.render(data);
+            //     speech.updateSliders(speech.iws);
+            //     speech.createShareButtons();
+            // })
         ).then(function() { dispatch.generated(speech.iws); });
 
     };
