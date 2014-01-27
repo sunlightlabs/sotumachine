@@ -8,13 +8,26 @@
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 {% endblock %}
 
+{% block ga %}
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-22821126-41', 'sunlightfoundation.com');
+  ga('send', 'pageview');
+
+</script>
+{% endblock %}
+
 {% block css %}
     <link rel="stylesheet" href="static/screen.css"/>
 {% endblock %}
 
 {% block container %}
         <aside id="sidebar">
-            <div class="sidebar-wrapper">
+            <div class="sidebar-wrapper active">
                 <section class="splash">
                     <h1 class="sotu-logo img-responsive">State of the Union Machine</h1>
 
@@ -27,8 +40,9 @@
                 </section>
 
                 <section class="settings">
+                    <h1 class="sotu-logo img-responsive">State of the Union Machine</h1>
                     <form role="form" id="president-form">
-                        <span class="settings-title">SOTU Settings Title Thing</span>
+                        <!-- span class="settings-title">SOTU Settings Title Thing</span-->
                         <div class="form-group">
                             <label for="">Barack Obama</label>
                             <input type="range" class="form-control" min="0" max="5" step="1" value="7" name="" id="slider-44" data-prez-id="44">
