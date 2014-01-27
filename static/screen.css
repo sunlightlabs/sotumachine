@@ -29,7 +29,7 @@ body {
 
 .container-fluid #sidebar,
 .container-fluid main {
-    margin-top: 16px;
+    margin-top: 25px;
 }
 
 
@@ -79,9 +79,10 @@ body {
     padding: 1em;
     background: url(/static/sotumachine-logo.png) center top no-repeat;
     width: 250px;
-    height: 163px;
+    height: 107px;
     text-indent: -9999em;
     float: left;
+    margin-bottom: 80px;
 }
 .sotu-logo:hover {
     background: url(/static/sotumachine-logo1.png) center top no-repeat;
@@ -243,9 +244,15 @@ main {
     border-bottom: 4px double #ccc;
     margin-bottom: 3.5em;
 }
+.sotu-header .title {
+    float: left;
+}
 .sotu-header p{
     font-style: italic;
     font-size: 80%;
+    color: #666;
+    margin-top: 27px;
+    margin-bottom: 40px;
 }
 .the-speech {
     font-family: "ff-meta-serif-web-pro", serif;
@@ -263,8 +270,8 @@ main {
     font-size: 4.5em;
     color: #2980b9;
     letter-spacing: -1px;
-    padding: 0.5em 0 0.25em;
-    margin-bottom: -.25em;
+    padding: 0 0 0.25em;
+    margin: 0 auto -.25em auto;
     line-height: .75em;
 }
 
@@ -391,5 +398,17 @@ footer .left {
 @media (max-width: 1055px) {
     .footer-link {
         width: 100%;
+    }
+}
+@media (max-width: 1100px) {
+    .sotu-header p{
+        float: none;
+        clear: both;
+        font-size: 70%;
+        margin-bottom: 40px;
+    }
+    .sotu-logo {
+        margin: 0 auto 40px auto;
+        float: none;
     }
 }
