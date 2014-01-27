@@ -165,7 +165,9 @@
                         <!-- Social Media Placeholders -->
                         <!-- Replace all this -->
 
-                        <div class="social-buttons"></div>
+                        <span>Share this speech</span>
+
+                        <div class="social-buttons" style="display: inline;"></div>
 
                         <!--
                         <a><span class="glyphicon glyphicon-thumbs-up"></span> Like</a>
@@ -209,17 +211,5 @@
 	    window.onload = (typeof window.onload != 'function') ?
 	      loadChartbeat : function() { oldonload(); loadChartbeat(); };
 	  })();
-	</script>
-	<script>
-	Socialite.setup({
-	    twitter: {
-	        lang       : 'en',
-	        onclick    : function(e) { /* ... */ },
-	        ontweet    : function(e) { /* ... */ },
-	        onretweet  : function(e) { /* ... */ },
-	        onfavorite : function(e) { /* ... */ },
-	        onfollow   : function(e) { /* ... */ }
-	    }
-	});
 	</script>
 {% endblock %}

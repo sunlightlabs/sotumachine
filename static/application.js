@@ -73,6 +73,13 @@ $(function (){
     $(window).on('resize', updateFooterWidth);
     updateFooterWidth();
 
+    function updateMethologyHeight() {
+        console.log($(this).height() - 100);
+        $('.methodology.active').css('max-height', $(this).height() - 100);
+    }
+    $(window).on('resize', updateMethologyHeight);
+    updateMethologyHeight();
+
     // toggle methodology
 
     $('.methodolgy-link').click(function() {
@@ -186,8 +193,10 @@ $(function (){
             .addClass('share-buttons')
             .attr('data-layout', 'horizontal')
             .attr('data-socialite', 'auto')
-            .attr('data-services', 'twitter-share,facebook-like')
-            .attr('data-twitter-share-options', 'defaultText=A%20dash%20of%20Obama%2C%20a%20touch%20of%20Reagan%2C%20add%20some%20Lincoln%20and%20GO!%20Create%20your%20own%20%23SOTU%20with%20%23SOTUmachine')
+            .attr('data-services', 'twitter,facebook')
+            .attr('data-twitter-options', 'related=sunfoundation&text=A%20dash%20of%20Obama%2C%20a%20touch%20of%20Reagan%2C%20add%20some%20Lincoln%20and%20GO!%20Create%20your%20own%20%23SOTU%20with%20%23SOTUmachine')
+            .attr('data-facebook-option', '')
+            .attr('data-options', 'size=24')
             .appendTo($('.social-buttons').empty())
             .trigger('register');
     }
