@@ -161,7 +161,6 @@ body {
 
 .form-control { background-color: #434c51; }
 .settings form {
-    padding-top: 2em;
 }
 .settings form .settings-title {
     color: #fff;
@@ -281,6 +280,13 @@ main {
     margin-bottom: 1.5em;
 }
 
+/*  Settings  */
+
+#president-form label {
+    margin-bottom: 2px;
+}
+
+
 /* footer */
 
 footer {
@@ -344,6 +350,15 @@ footer .left {
     font-size: 1.25em;
     color: #666;
     border-bottom: 1px dashed #ccc;
+}
+.methodology h4{
+    text-transform: uppercase;
+    font-family: "proxima-nova-condensed", sans-serif;
+    font-size: 120%;
+    color: #666;
+}
+.methodology h4.section-heading {
+    font-weight: 400;
 }
 
 /* Animations */
