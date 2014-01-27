@@ -3,6 +3,8 @@ var currentIWS;
 
 $(function (){
 
+    var liveGenerate = true;
+
     function Console() {};
     Console.prototype.log = function(msg) {};
     console = console || new Console();
@@ -155,16 +157,24 @@ $(function (){
 
     };
     Speech.prototype.updateSliders = function(iws) {
+        liveGenerate = false;
         $('#president-form input').each(function(index, elem) {
             var val = parseInt(iws[(index * 3) + 2]);
             $(elem).val(val).trigger('change');
         });
+        liveGenerate = true;
     };
 
     speech = new Speech('.the-speech-content');
 
+    // $('a.generate-it').click(function(ev) {
+    //     ev.preventDefault();
+    //     speech.generate();
+    // });
+
     $("#president-form input[type=range]").change(function(ev) {
-        speech.generate();
+        if (liveGenerate)
+            speech.generate();
     })
 
     $(window).bind('popstate', function() {
