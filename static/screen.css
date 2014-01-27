@@ -77,6 +77,13 @@ body {
 
 .sotu-logo {
     padding: 1em;
+    background: url(/static/sotumachine-logo.png) center top no-repeat;
+    width: 250px;
+    height: 163px;
+    text-indent: -9999em;
+}
+.sotu-logo:hover {
+    background: url(/static/sotumachine-logo1.png) center top no-repeat;
 }
 
 .splash .info {
