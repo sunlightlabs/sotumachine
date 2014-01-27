@@ -312,7 +312,7 @@ main {
     top: -0.25em;
 }
 
-.the-speech p: first-of-type span: first-of-type {
+.the-speech p:nth-of-type(1) span:first-of-type {
     text-transform: uppercase;
 }
 
