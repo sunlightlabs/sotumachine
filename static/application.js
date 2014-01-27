@@ -122,8 +122,7 @@ $(function (){
                     speech.id = data.id;
                     speech.iws = data.iws;
                     if (history && history.pushState) {
-                        history.pushState({'id': data.id, 'iws': data.iws}, '', '/#' + data.id);
-                        // $('link[rel=canonical]').attr('href', window.location);
+                        history.pushState({'id': data.id, 'iws': data.iws}, '', '/s/' + data.id);
                         if (twttr) { twttr.widgets.load(); }
                     }
                 }
@@ -195,17 +194,30 @@ $(function (){
 
     $(window).bind('popstate', function() {
         if (window.location.hash) {
-            var id = window.location.hash.substring(1);
-            speech.clear();
-            speech.reload(id);
+            var id = parseLocation();
+            if (id) {
+                speech.clear();
+                speech.reload(id);
+            }
         }
-        // $('link[rel=canonical]').attr('href', window.location);
         if (twttr) { twttr.widgets.load(); }
     });
 
-    if (window.location.hash) {
-        var id = window.location.hash.substring(1);
-        speech.reload(id);
+
+    /*
+     * init everything
+     */
+
+    var parseLocation = function() {
+        var match = window.location.pathname.match(/\/s\/(\w{8})/);
+        if (match) {
+            return match[1];
+        }
+    };
+
+    var initId = parseLocation();
+    if (initId) {
+        speech.reload(initId);
     } else {
         speech.updateSliders(speech.randomIWS());
         speech.generate();

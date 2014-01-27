@@ -93,10 +93,13 @@ def random_iws():
 
 @app.route('/s/<speech_id>', methods=['GET'])
 def speech_proxy(speech_id):
-    path = '%s/%s/%s/%s.json' % (speech_id[0], speech_id[1], speech_id[2], speech_id[3:])
-    url = 'http://sotumachine.s3.amazonaws.com/speeches/%s' % path
-    resp = requests.get(url)
-    return Response(resp.content, mimetype='application/json')
+    if request.is_xhr:
+        path = '%s/%s/%s/%s.json' % (speech_id[0], speech_id[1], speech_id[2], speech_id[3:])
+        url = 'http://sotumachine.s3.amazonaws.com/speeches/%s' % path
+        resp = requests.get(url)
+        return Response(resp.content, mimetype='application/json')
+    else:
+        return render_template('index.html')
 
 
 if __name__ == '__main__':

@@ -92,7 +92,7 @@ var prezPicture = svg.append("g")
 
 var updatePicture = function(id) {
   var ext = (id == null) ? "png" : "jpg";
-  prezPicture.attr("xlink:href", "static/"+id+"." + ext);
+  prezPicture.attr("xlink:href", "/static/"+id+"." + ext);
 };
 
 function key(d) {
