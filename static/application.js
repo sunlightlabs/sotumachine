@@ -11,6 +11,17 @@ $(function (){
 
     // gradient for slider fill
 
+    var prezFillColors = {  "01": "#6BBBA1",
+                        "03": "#C8D7A1",
+                        "16": "#F2DA57",
+                        "26": "#F6B656",
+                        "40": "#E25A42",
+                        "41": "#DCBDCF",
+                        "42": "#B396AD",
+                        "43": "#E58429",
+                        "44": "#B0CBDB"  }
+                        
+
     function fillSlider() {
             var val = ($(this).val() - $(this).attr('min')) / ($(this).attr('max') - $(this).attr('min'));
             var fillColor = '#c9a706';
@@ -18,7 +29,7 @@ $(function (){
 
             $(this).css('background-image',
                         '-webkit-gradient(linear, left top, right top, '
-                        + 'color-stop(' + val + ',' + fillColor + '),'
+                        + 'color-stop(' + val + ',' + prezFillColors[$(this).attr('data-prez-id')] + '),'
                         + 'color-stop(' + val + ',' + baseColor + ')'
                         + ')'
                         );
