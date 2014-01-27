@@ -20,7 +20,7 @@ $(function (){
                         "42": "#B396AD",
                         "43": "#E58429",
                         "44": "#B0CBDB"  }
-                        
+
 
     function fillSlider() {
             var val = ($(this).val() - $(this).attr('min')) / ($(this).attr('max') - $(this).attr('min'));
@@ -125,6 +125,7 @@ $(function (){
                         history.pushState({'id': data.id, 'iws': data.iws}, '', '/s/' + data.id);
                         if (twttr) { twttr.widgets.load(); }
                     }
+                    speech.createShareButtons();
                 }
             )
         ).then(function() {
@@ -167,6 +168,7 @@ $(function (){
                 speech.iws = data.iws;
                 speech.render(data);
                 speech.updateSliders(speech.iws);
+                speech.createShareButtons();
             })
         ).then(function() { dispatch.generated(speech.iws); });
 
@@ -179,6 +181,16 @@ $(function (){
         });
         liveGenerate = true;
     };
+    Speech.prototype.createShareButtons = function() {
+        var $socialite = $('<div></div>')
+            .addClass('share-buttons')
+            .attr('data-layout', 'horizontal')
+            .attr('data-socialite', 'auto')
+            .attr('data-services', 'twitter-share,facebook-like')
+            .attr('data-twitter-share-options', 'defaultText=A%20dash%20of%20Obama%2C%20a%20touch%20of%20Reagan%2C%20add%20some%20Lincoln%20and%20GO!%20Create%20your%20own%20%23SOTU%20with%20%23SOTUmachine')
+            .appendTo($('.social-buttons').empty())
+            .trigger('register');
+    }
 
     speech = new Speech('.the-speech-content');
 
