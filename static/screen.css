@@ -318,6 +318,7 @@ footer .left {
     float: left;
     margin: 5px 10px 0px;
 }
+.footer-link iframe { display: inline; }
 .right .footer-link {
     float: right;
     text-align: right;

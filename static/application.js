@@ -196,6 +196,7 @@ $(function (){
         var id = window.location.hash.substring(1);
         speech.reload(id);
     } else {
+        speech.updateSliders(speech.randomIWS());
         speech.generate();
     }
 
