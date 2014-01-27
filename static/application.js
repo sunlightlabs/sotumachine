@@ -48,7 +48,7 @@ $(function (){
     $('#permalink').popover({
         placement: 'left',
         html: true,
-        content: geturl()
+        content: geturl
     });
 
     // set width for fixed footer correctly, with window resize
