@@ -3,7 +3,8 @@
 {% block title %}State of the Union Machine - Sunlight Foundation{% endblock %}
 
 {% block head %}
-	<script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
     <meta name="description" content="Randomly generate a unique State of Union based on language modeling of the speeches from previous presidents. An app from the nonpartisan Sunlight Foundation.">
 	<link rel="shortcut icon" href="http://sunlight-assets.s3.amazonaws.com/academy/favicon.ico">
 	<script src="http://d36xyxqdggpeuw.cloudfront.net/static/html5shiv.js"></script>
@@ -28,56 +29,45 @@
 
 {% block container %}
         <aside id="sidebar">
-            <div class="sidebar-wrapper active">
-                <section class="splash">
-                    <h1 class="sotu-logo">State of the Union Machine</h1>
-
-                    <div class="info">
-                        <p class="prezColors">Generate a random State of the Union based on language modeling of the speeches from previous presidents. Learn more about the nonpartisan <a href="http://sunlightfoundation.com">Sunlight Foundation</a> and <a href="http://sunlightfoundation.com/tools">our tools here</a>. Enjoy! </p>
-                        <button type="button" class="btn btn-primary btn-cta">Generate a New Speech! <span class="glyphicon glyphicon-chevron-right"></span></button>
-                    </div>
-
-                    <a class="btn btn-info btn-back hidden"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
-                </section>
 
                 <section class="settings">
                     <form role="form" id="president-form">
-                        <!-- span class="settings-title">SOTU Settings Title Thing</span-->
+
                         <div class="form-group">
                             <label for="">Barack Obama</label>
-                            <input type="range" class="form-control" min="0" max="5" step="1" value="0" name="" id="slider-44" data-prez-id="44">
+                            <input type="range" class="form-control slider" min="0" max="5" step="1" value="0" name="" id="slider-44" data-prez-id="44">
                         </div>
                         <div class="form-group">
                             <label for="">George W. Bush</label>
-                            <input type="range" class="form-control" min="0" max="5" step="1" value="0" name="" id="slider-43" data-prez-id="43">
+                            <input type="range" class="form-control slider" min="0" max="5" step="1" value="0" name="" id="slider-43" data-prez-id="43">
                         </div>
                         <div class="form-group">
                             <label for="">Bill Clinton</label>
-                            <input type="range" class="form-control" min="0" max="5" step="1" value="0" name="" id="slider-42" data-prez-id="42">
+                            <input type="range" class="form-control slider" min="0" max="5" step="1" value="0" name="" id="slider-42" data-prez-id="42">
                         </div>
                         <div class="form-group">
                             <label for="">George H. W. Bush</label>
-                            <input type="range" class="form-control" min="0" max="5" step="1" value="0" name="" id="slider-41" data-prez-id="41">
+                            <input type="range" class="form-control slider" min="0" max="5" step="1" value="0" name="" id="slider-41" data-prez-id="41">
                         </div>
                         <div class="form-group">
                             <label for="">Ronald Reagan</label>
-                            <input type="range" class="form-control" min="0" max="5" step="1" value="0" name="" id="slider-40" data-prez-id="40">
+                            <input type="range" class="form-control slider" min="0" max="5" step="1" value="0" name="" id="slider-40" data-prez-id="40">
                         </div>
                         <div class="form-group">
                             <label for="">Theodore Roosevelt</label>
-                            <input type="range" class="form-control" min="0" max="5" step="1" value="0" name="" id="slider-26" data-prez-id="26">
+                            <input type="range" class="form-control slider" min="0" max="5" step="1" value="0" name="" id="slider-26" data-prez-id="26">
                         </div>
                         <div class="form-group">
                             <label for="">Abraham Lincoln</label>
-                            <input type="range" class="form-control" min="0" max="5" step="1" value="0" name="" id="slider-16" data-prez-id="16">
+                            <input type="range" class="form-control slider" min="0" max="5" step="1" value="0" name="" id="slider-16" data-prez-id="16">
                         </div>
                         <div class="form-group">
                             <label for="">Thomas Jefferson</label>
-                            <input type="range" class="form-control" min="0" max="5" step="1" value="0" name="" id="slider-03" data-prez-id="03">
+                            <input type="range" class="form-control slider" min="0" max="5" step="1" value="0" name="" id="slider-03" data-prez-id="03">
                         </div>
                         <div class="form-group">
                             <label for="">George Washington</label>
-                            <input type="range" class="form-control" min="0" max="5" step="1" value="0" name="" id="slider-01" data-prez-id="01">
+                            <input type="range" class="form-control slider" min="0" max="5" step="1" value="0" name="" id="slider-01" data-prez-id="01">
                         </div>
                     </form>
 
@@ -85,7 +75,6 @@
                         <!-- donut here -->
                     </div>
                 </section>
-            </div>
         </aside>
 
         <main>
@@ -93,9 +82,11 @@
                 <div class="the-speech col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
                     <div class="row sotu-header">
                         <div class="sotu-machine-header clearfix">
-                            <h1 class="sotu-logo img-responsive">State of the Union Machine</h1>
+
+                            <h1 class="sotu-logo">State of the Union Machine</h1>
+                            
                             <div class="info">
-                                    <p class="prezColors col-lg-offset-3">Generate a random State of the Union based on language modeling of the speeches from previous presidents. Learn more about the nonpartisan <a href="http://sunlightfoundation.com">Sunlight Foundation</a> and <a href="http://sunlightfoundation.com/tools">our tools here</a>. Enjoy! </p>
+                                    <p class="col-lg-offset-3">Generate a random State of the Union based on language modeling of the speeches from previous presidents. Learn more about the nonpartisan <a href="http://sunlightfoundation.com">Sunlight Foundation</a> and <a href="http://sunlightfoundation.com/tools">our tools here</a>. Enjoy! </p>
                             </div>
                         </div>
                         <h2>State<span class="fancy">of the</span>Union</h2>
@@ -152,33 +143,31 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-6 left">
+                <div class="col-sm-8 left">
                     <span class="footer-link">
-                        <a class="methodolgy-link"><span class="glyphicon glyphicon-book"></span> About SOTU machine</a>
+                        <a class="methodolgy-link"><span class="glyphicon glyphicon-book"></span>
+                            About<span class="hidden-sm-footer"> SOTU machine</span>
+                        </a>
                     </span>
                     <span class="footer-link">
-                        <a href="https://github.com/sunlightlabs/sotumachine"><span class="glyphicon glyphicon-download"></span> See the SOTU Machine code on GitHub</a>
+                        <a href="https://github.com/sunlightlabs/sotumachine"><span class="glyphicon glyphicon-download"></span>
+                            <span class="hidden-sm-footer">See the SOTU Machine code on </span>GitHub
+                        </a>
                     </span>
                     <span class="footer-link">
-                        <a href="http://sunlightfoundation.com/join/"><span class="glyphicon glyphicon-usd"></span> Support our work</a>
+                        <a href="http://sunlightfoundation.com/join/"><span class="glyphicon glyphicon-usd"></span>
+                            Support our work
+                        </a>
                     </span>
                 </div>
 
-                <div class="col-sm-6 hidden-xs right">
+                <div class="col-sm-4 hidden-xs right">
                     <span class="footer-link" style="padding-right: 10px">
 
-                        <!-- Social Media Placeholders -->
-                        <!-- Replace all this -->
-
+                        <!-- Social Media -->
 
                         <div class="social-buttons" style="float: right; margin-left: 1em;"></div>
-                        <span>Share this speech</span>
-
-                        <!--
-                        <a><span class="glyphicon glyphicon-thumbs-up"></span> Like</a>
-                        &nbsp; &nbsp; &nbsp; &nbsp;
-                        <a><span class="glyphicon glyphicon-thumbs-up"></span> Tweet</a>
-                        -->
+                        <span>Share this<span class="hidden-xs-footer"> speech</span></span>
                     </span>
 
                     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>

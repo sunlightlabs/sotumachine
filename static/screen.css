@@ -47,55 +47,12 @@ body {
     display: none;
 }
 
-.sidebar-wrapper {
-    width: 601px;
-    position: relative;
-    left: 0;
-    /*transition*/
-    -webkit-transition: all 300ms ease-out;
-       -moz-transition: all 300ms ease-out;
-         -o-transition: all 300ms ease-out;
-            transition: all 300ms ease-out;
-}
-
-.sidebar-wrapper.active {
-    left: -301px;
-}
-
-.splash,
 .settings {
-    float: left;
-    width: 300px;
+    width: 100%;
     padding: 25px;
     position: relative;
 }
 
-.splash {
-    width: 301px;
-    border-right: 1px dashed #999;
-}
-
-.sotu-logo {
-    background-position: 0 149px;
-    padding: 1em;
-    background: url(/static/sotumachine-logo.png) center top no-repeat;
-    width: 250px;
-    height: 107px;
-    text-indent: -9999em;
-    float: left;
-    margin-bottom: 80px;
-}
-.sotu-logo:hover {
-    background: url(/static/sotumachine-logo1.png) center top no-repeat;
-}
-
-
-.splash .info {
-    padding: 1.25em 0;
-    margin: 2em 0 1em;
-    border-top: 4px double #333;
-    border-bottom: 4px double #333;
-}
 /* here lies buttons */
 
 .btn,
@@ -166,9 +123,9 @@ body {
 /* sidebar content*/
 
 #sotu-chart {
-    margin: 0 25px;
     height: 200px;
     width: 200px;
+    margin: 0 auto;
 }
 
 .prezColors .q0-9 { fill: #F2DA57; background-color: #F2DA57; }
@@ -186,8 +143,6 @@ body {
 .form-control { background-color: #434c51; }
 /*.form-group {margin-bottom: 12px; }*/
 
-.settings form {
-}
 .settings form .settings-title {
     color: #fff;
     text-transform: uppercase;
@@ -208,12 +163,14 @@ body {
     color: #ccc;
 }
 
-input[type="range"] {
+.slider {
     -webkit-appearance: none;
-    -moz-apperance: none;
+    -moz-appearance: none;
     height: 5px;
     padding: 0;
     background: #333;
+    background-clip: padding-box;
+    outline: none;
     /*border-radius*/
     -webkit-border-radius: 0;
        -moz-border-radius: 0;
@@ -226,20 +183,19 @@ input[type="range"] {
             transition: opacity 100ms ease-out;
 }
 
-input[type="range"]:hover {
+.slider:hover {
     opacity: .8;
     cursor: pointer;
 }
-input[type='range']::-webkit-slider-thumb { -webkit-appearance: none !important; background-color: #fff; height: 13px; width: 6px; cursor: pointer; }
+.slider::-webkit-slider-thumb { -webkit-appearance: none !important; background-color: #fff; height: 13px; width: 6px; cursor: pointer; }
 
-<<<<<<< HEAD
-input[type='range']::-ms-fill-lower { background: #c9a706; }
-input[type='range']::-ms-fill-upper { background: #333; }
-input[type='range']::-ms-thumb { background: #fff;height: 13px;width: 6px; }
-input[type='range']::-ms-track { border: none; }
+.slider::-ms-fill-lower { background: #c9a706; }
+.slider::-ms-fill-upper { background: #333; }
+.slider::-ms-thumb { background: #fff;height: 13px;width: 6px; }
+.slider::-ms-track { border: 0; }
 
-input[type='range']::-moz-range-thumb { background: #fff; height: 13px; border-radius: 0; }
-input[type='range']::-moz-range-track { border: 1px solid #434c51; background: #333; }
+.slider::-moz-range-thumb { background: #fff; height: 13px; width: 6px; border-radius: 0; border: 0; }
+.slider::-moz-range-track { border: 0; background: transparent; }
 
 div.tooltip {
     position: absolute;
@@ -267,11 +223,36 @@ main {
     padding: 5px;
 }
 .sotu-header {
+    padding-bottom: 1em;
+    margin-bottom: 3em;
     border-bottom: 4px double #ccc;
-    margin-bottom: 3.5em;
 }
 .sotu-header .title {
     float: left;
+}
+.sotu-machine-header {
+    margin-bottom: 1em;
+}
+.sotu-logo {
+    background-position: 0 149px;
+    margin: .5em;
+    background: url(/static/sotumachine-logo.png) center 0px no-repeat;
+    width: 175px;
+    height: 105px;
+    background-size: cover;
+    text-indent: -9999em;
+    float: left;
+    margin-bottom: 80px;
+    transition: -webkit-transform 150ms ease-out;
+    transition: -ms-transform 150ms ease-out;
+    transition: -moz-transform 150ms ease-out;
+}
+.sotu-logo:hover {
+    background: url(/static/sotumachine-logo.png) center -106px no-repeat;
+    background-size: cover;
+    -webkit-transform: rotate(12deg);
+    -ms-transform: rotate(12deg);
+    -moz-transform: rotate(12deg);
 }
 .sotu-header p{
     font-style: italic;
@@ -382,8 +363,9 @@ footer.active {
 /* methodology */
 
 .methodology {
-    overflow: scroll;
+    padding: 0 15px;
     max-height: 0;
+    overflow: scroll;
     /*transition*/
     -webkit-transition: all 0.3s ease-out;
        -moz-transition: all 0.3s ease-out;
@@ -471,18 +453,52 @@ ul.social-follow{
 }
 
 /* Media Queries */
-@media (max-width:  1055px) {
-    .footer-link  { width: 100%; }
+
+@media only screen
+  and (min-device-width : 768px)
+  and (max-device-width : 1024px)
+  and (orientation:landscape) 
+{
+    .slider::-webkit-slider-thumb { -webkit-appearance: none !important; border-radius: 50%; background-color: #fff; height: 20px; width: 20px; cursor: pointer; }
+
 }
+@media only screen
+  and (min-device-width : 768px)
+  and (max-device-width : 1024px)
+  and (orientation:portrait) 
+{
+    .slider::-webkit-slider-thumb { -webkit-appearance: none !important; border-radius: 50%; background-color: #fff; height: 20px; width: 20px; cursor: pointer; }
+
+}
+
+@media (max-width: 970px) {
+    #sidebar {
+        width: 250px;
+    }
+    main {
+        margin-left: 250px;
+    }
+    footer {
+        margin-left: 250px;
+    }
+}
+
+@media (max-width: 965px) {
+    .hidden-xs-footer { display: none; }
+}
+
+@media (max-width: 1070px) {
+    .hidden-sm-footer { display: none; }
+}
+
 @media (max-width: 1100px) {
     .sotu-header p{
         float: none;
         clear: both;
         font-size: 70%;
-        margin-bottom: 40px;
     }
     .sotu-logo {
-        margin: 0 auto 40px auto;
+        margin: 0 auto 0px auto;
         float: none;
     }
 }

@@ -23,19 +23,28 @@ $(function (){
 
 
     function fillSlider() {
-            var val = ($(this).val() - $(this).attr('min')) / ($(this).attr('max') - $(this).attr('min'));
+            var val = ($(this).val() - $(this).attr('min')) / ($(this).attr('max') - $(this).attr('min')) * 100 + '%';
             var fillColor = '#c9a706';
             var baseColor = '#333';
 
-            $(this).css('background-image',
+            // use gradient for webkit browsers that still rely on prefix
+            // no-prefix browsers use background-image to override
+            
+            $(this).css({
+                        'background':
                         '-webkit-gradient(linear, left top, right top, '
-                        + 'color-stop(' + val + ',' + prezFillColors[$(this).attr('data-prez-id')] + '),'
-                        + 'color-stop(' + val + ',' + baseColor + ')'
-                        + ')'
-                        );
+                            + 'color-stop(' + val + ',' + prezFillColors[$(this).attr('data-prez-id')] + '),'
+                            + 'color-stop(' + val + ',' + baseColor + ')'
+                        + ')',
+                        'background-image':
+                        'linear-gradient(to right, '
+                            + prezFillColors[$(this).attr('data-prez-id')] + ' ' + val + ','
+                            + baseColor + ' ' + val
+                        + ')',
+                        });  
     }
 
-    $('input[type="range"]')
+    $('.slider')
         .each(fillSlider)
         .change(fillSlider);
 
@@ -68,7 +77,7 @@ $(function (){
     var $footer = $('footer');
 
     function updateFooterWidth() {
-        $footer.css('max-width', $(this).width() - 300);
+        $footer.css( 'max-width', $(this).width() - $('#sidebar').width() );
     }
     $(window).on('resize', updateFooterWidth);
     updateFooterWidth();
