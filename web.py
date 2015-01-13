@@ -51,7 +51,7 @@ def get_speech_writer():
     global speech_writer
     if not speech_writer:
         from speechgen.models import SpeechWriter
-        speech_writer = SpeechWriter(settings.STATS_PATH)
+        speech_writer = SpeechWriter(settings.STATS_PATH, ngram_order=3)
     return speech_writer
 
 if not app.config['DEBUG']:

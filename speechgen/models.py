@@ -170,7 +170,7 @@ class SpeechWriter(object):
         sentence = self._presidents[prez_id].next_sent(self.context)
         paragraph.append((prez_id, retokenize(sentence)))
         for i in xrange(num_wiggle(self.speech_stats['avg_para_length'])):
-            self.context = sentence[-2:]
+            self.context = sentence[-1:]
             sentence = self._presidents[prez_id].next_sent(self.context)
             if citations:
                 paragraph.append((prez_id, retokenize(sentence)))
