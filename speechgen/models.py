@@ -10,6 +10,8 @@ from collections import Iterable
 
 import nltk
 
+sys.path.append(os.getcwd())
+
 from settings import LANG_MODEL_DIR
 
 from utils import num_wiggle, parse_weight_string, weighted_avg, join_dicts, retokenize, make_model_fname
@@ -182,10 +184,10 @@ if __name__ == "__main__":
     sys.stderr.write("="*80+'\n')
     from utils import get_random_id_weight_string
 
-    stats = json.load(open('stats.json'))
-    iws = get_random_id_weight_string(stats)
+    stats = json.load(open('data/stats.json'))
+    iws = get_random_id_weight_string(stats) + '993'
 
-    sw = SpeechWriter('stats.json')
+    sw = SpeechWriter('data/stats.json')
     speech = sw.generate_speech(iws)
 
     sys.stderr.write("One Paragraph...\n\n")
