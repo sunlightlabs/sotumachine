@@ -19,6 +19,7 @@ presidents = {
  'George Bush': 41,
  'George W. Bush': 43,
  'Barack Obama': 44,
+ 'Barack Obama Preview': 99,
  'William J. Clinton': 42,
  'Ronald Reagan': 40,
  'George Washington': 01,
@@ -124,6 +125,7 @@ def avg_int(counts):
 
 def get_stats(presidents):
     stat_dicts = []
+    preambles = json.load(open('data/preambles.json','r'))
     for (name, number) in presidents.iteritems():
         stat_dict = {}
         stat_dict.update({
@@ -156,7 +158,6 @@ def get_stats(presidents):
             u'avg_sent_length' : weighted_avg(sent_lengths.keys(),
                 sent_lengths.values()),
             })
+        stat_dict.update({'preambles': preambles[stat_dict['id']]})
         stat_dicts.append(stat_dict)
-    json.dump(stat_dicts, open('stats.json','w'))
-
-
+    json.dump(stat_dicts, open('data/stats.json','w'), indent=2)
