@@ -87,7 +87,7 @@ var prezPicture = svg.append("g")
 
 var updatePicture = function(id) {
   var ext = (id == null) ? "png" : "jpg";
-  if (focusedPrezID == null) {
+  if (focusedPrezID == null || id == focusedPrezID) {
       prezPicture.attr("xlink:href", "/static/"+id+"." + ext);
   };
 };
@@ -303,6 +303,7 @@ dispatch.on("toggleFocus", function(prez_id) {
           .classed('focused', true)
           .classed('unfocused', false);
         focusedPrezID = prez_id;
+        updatePicture(prez_id);
     }
 });
 
