@@ -3,6 +3,7 @@ import random
 import sys, os
 import json
 import operator
+import pdb
 
 from datetime import datetime
 from glob import glob
@@ -12,22 +13,27 @@ import nltk
 
 sys.path.append(os.getcwd())
 
-from settings import LANG_MODEL_DIR
+from settings import LANG_MODEL_DIR, STUBS_DIR
 
-from utils import num_wiggle, parse_weight_string, weighted_avg, join_dicts, retokenize, make_model_fname
+from utils import num_wiggle, parse_weight_string, weighted_avg, join_dicts, retokenize, make_model_fname, make_stubs_fname
 
 class President(object):
     _default_preamble = ['My', 'Fellow', 'Americans', ',']
 
-    def __init__(self, ngram_pickle, personal_stats):
+    def __init__(self, ngram_pickle, stubs_pickle, personal_stats):
         if isinstance(ngram_pickle, basestring):
             _ngram_file = open(ngram_pickle)
         else:
             _ngram_file = ngram_pickle
+        if isinstance(stubs_pickle, basestring):
+            _stubs_file = open(stubs_pickle)
+        else:
+            _stubs_file = stubs_pickle
         self._ngram_model = cPickle.load(_ngram_file)
+        self._stubs = cPickle.load(_stubs_file)
         self._stats = personal_stats
         self.ngram_order = self._ngram_model._n
-        self.window_length = 6
+        self.window_length = 3
 
     @property
     def avg_para_length(self):
@@ -61,7 +67,7 @@ class President(object):
 
     def next_sent(self, context=None):
         sent = []
-        while len(sent) < 6 or (not sent[0][0].isalpha()):
+        while len(sent) < 2:
             sent = self.make_sent(context)
         return sent
 
@@ -94,12 +100,16 @@ def make_presidents(stats, ngram_order=3, select=None):
         sys.stderr.write(stat_dict['name']+'...')
         model_fname = make_model_fname(prez_id, ngram_order)
         model_loc = os.path.join(LANG_MODEL_DIR, model_fname)
-        if os.path.exists(model_loc):
-            presidents[prez_id] = President(os.path.join(LANG_MODEL_DIR, model_fname), stat_dict)
-        else:
+        if not os.path.exists(model_loc):
             print model_loc
             raise Exception('no {order}-gram model found for {prez_id} ({prez_name})'.format(
                 order=ngram_order, prez_id = prez_id, prez_name = stat_dict['name']))
+        stubs_fname = make_stubs_fname(prez_id)
+        stubs_loc = os.path.join(STUBS_DIR, stubs_fname)
+        if not os.path.exists(stubs_loc):
+            raise Exception('no stubs found for {prez_id} ({prez_name})'.format(
+                prez_id = prez_id, prez_name = stat_dict['name']))
+        presidents[prez_id] = President(model_loc, stubs_loc, stat_dict)
         sys.stderr.write('loaded.\n')
     return presidents
 
@@ -162,16 +172,19 @@ class SpeechWriter(object):
 
         for i in xrange(int(15)):
             #great place to parallelize
-            yield self.generate_paragraph(citations)
+            yield self.generate_paragraph(i, citations)
 
-    def generate_paragraph(self, citations):
+    def generate_paragraph(self, graf_num, citations):
         paragraph = []
         prez_id = self.principal
-        sentence = self._presidents[prez_id].next_sent(self.context)
-        paragraph.append((prez_id, retokenize(sentence)))
-        for i in xrange(num_wiggle(self.speech_stats['avg_para_length'])):
-            self.context = sentence[-1:]
+        if graf_num == 0:
             sentence = self._presidents[prez_id].next_sent(self.context)
+            paragraph.append((prez_id, retokenize(sentence)))
+        for i in xrange(num_wiggle(self.speech_stats['avg_para_length'])):
+            stub = random.choice(self._presidents[prez_id]._stubs)
+            #pdb.set_trace()
+            self.context = tuple(stub)
+            sentence = stub + self._presidents[prez_id].next_sent(self.context)
             if citations:
                 paragraph.append((prez_id, retokenize(sentence)))
             else:
@@ -196,3 +209,11 @@ if __name__ == "__main__":
     sys.stderr.write("Now with citations...\n\n")
     speech = sw.generate_speech(iws,citations=True)
     print speech.next()
+
+    do_full = raw_input("full speech?")
+
+    if do_full in ['Y','y']:
+        sys.stderr.write("Full speech...\n\n")
+        speech = sw.generate_speech(iws,citations=True)
+        for p in speech:
+            print p

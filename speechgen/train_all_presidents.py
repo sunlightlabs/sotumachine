@@ -3,6 +3,7 @@ import os
 import json
 from glob import glob
 import cPickle
+import pdb
 
 from collections import defaultdict
 
@@ -12,8 +13,8 @@ import nltk
 from nltk.model.ngram import NgramModel
 from nltk.probability import LidstoneProbDist
 
-from settings import TEXT_DIR, LANG_MODEL_DIR
-from utils import weighted_avg, make_model_fname
+from settings import TEXT_DIR, LANG_MODEL_DIR, STUBS_DIR
+from utils import weighted_avg, make_model_fname, make_stubs_fname
 
 presidents = {
  'George Bush': 41,
@@ -76,14 +77,20 @@ def tokenize_and_demarcate(raw_paragraph):
 
 def parse_transcript(transcript_filename):
     speech = []
+    stubs = []
     with open(transcript_filename) as transcript:
         for line in transcript:
             raw = nltk.clean_html(line.strip())
             for orig_char, new_char in replace_chars.iteritems():
                 raw = raw.replace(orig_char, new_char)
             if raw:
-                speech.extend(tokenize_and_demarcate(raw))
-    return speech
+                sent = tokenize_and_demarcate(raw)
+                for s in sent:
+                    stub = s[0:3]
+                    if ('~SENT~' not in stub) and ('bless' not in stub) and (all([x.isalpha() for x in stub])):
+                        stubs.append(stub)
+                speech.extend(sent)
+    return (speech, stubs)
 
 def first_paragraphs(name,prez_id):
     print name,'-',prez_id
@@ -102,9 +109,10 @@ def build_corpus(name):
 def train_model(corpus, order):
     speeches = []
     for transcript_filename in corpus:
-        speeches.extend(parse_transcript(transcript_filename))
+        speech, stubs = parse_transcript(transcript_filename)
+        speeches.extend(speech)
     ngram_model = NgramModel(order, speeches, estimator=est)
-    return ngram_model
+    return (ngram_model, stubs)
 
 def pickle_model(ngram_model, prez_number):
     prez_number = unicode(prez_number).zfill(2)
@@ -113,12 +121,19 @@ def pickle_model(ngram_model, prez_number):
     with open(os.path.join(LANG_MODEL_DIR, model_fname), 'wb') as modelfile:
         cPickle.dump(ngram_model, modelfile)
 
+def pickle_stubs(stubs, prez_number):
+    prez_number = unicode(prez_number).zfill(2)
+    stubs_fname = make_stubs_fname(prez_number)
+    with open(os.path.join(STUBS_DIR, stubs_fname), 'wb') as stubfile:
+        cPickle.dump(stubs, stubfile)
+
 def train_all_models(presidents, n=3):
     if not os.path.exists(LANG_MODEL_DIR):
         os.mkdir(LANG_MODEL_DIR)
     for name,number in presidents.iteritems():
-        ngram_model = train_model(build_corpus(name), n)
+        ngram_model, stubs = train_model(build_corpus(name), n)
         pickle_model(ngram_model, number)
+        pickle_stubs(stubs, number)
 
 def avg_int(counts):
     return int(float(sum(counts)) / float(len(counts)))

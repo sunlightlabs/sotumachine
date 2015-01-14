@@ -54,3 +54,7 @@ def get_random_id_weight_string(statistics):
 def make_model_fname(prez_number, ngram_order):
     prez_number = unicode(prez_number).zfill(2)
     return '{n}_{o}_gram_model.pickle'.format(n=prez_number, o=ngram_order)
+
+def make_stubs_fname(prez_number):
+    prez_number = unicode(prez_number).zfill(2)
+    return '{n}_stubs.pickle'.format(n=prez_number,)
