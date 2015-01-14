@@ -1,7 +1,7 @@
 $(function (){
 // EVENT DISPATCHER
 
-window.dispatch = d3.dispatch("load", "generated", "highlight", "unhighlight");
+window.dispatch = d3.dispatch("load", "generated", "highlight", "unhighlight", "toggleFocus");
 
 // DONUT CHART
 
@@ -22,6 +22,8 @@ var presidents = {
 var tooltip = d3.select("body").append("div")
     .attr("class", "tooltip")
     .style("opacity", 0);
+
+var focusedPrezID = null;
 
 var testvar;
 
@@ -85,7 +87,9 @@ var prezPicture = svg.append("g")
 
 var updatePicture = function(id) {
   var ext = (id == null) ? "png" : "jpg";
-  prezPicture.attr("xlink:href", "/static/"+id+"." + ext);
+  if (focusedPrezID == null) {
+      prezPicture.attr("xlink:href", "/static/"+id+"." + ext);
+  };
 };
 
 function key(d) {
@@ -142,6 +146,7 @@ var firstPrezID;
 
 var sentenceHighlighting = function() {
     d3.selectAll('.sentence')
+            .classed('unfocused', true)
             .on('mouseover', function(d) {
                 var prez_id = String(d3.select(this).attr('data-prez-id'));
                 dispatch.highlight(prez_id);
@@ -149,7 +154,13 @@ var sentenceHighlighting = function() {
             .on('mouseout', function(d) {
                 var prez_id = String(d3.select(this).attr('data-prez-id'));
                 dispatch.unhighlight(prez_id);
-            });
+            })
+            .on('click', function(d) {
+                var prez_id = String(d3.select(this).attr('data-prez-id'));
+                dispatch.highlight(prez_id);
+                dispatch.toggleFocus(prez_id);
+            })
+            ;
 };
 
 dispatch.on("generated", function (id_weight_string) {
@@ -172,7 +183,7 @@ dispatch.on("generated", function (id_weight_string) {
     path.enter().append("path")
         .each(function(d, i) { this._current = findNeighborArc(i, data0, data1, key) || d; })
         .attr("class", function(d){ 
-            var c = "prezColors p"+d.data.id;
+            var c = "prezColors p"+d.data.id+" unfocused";
             console.log(c);
             return c;
         })
@@ -184,6 +195,9 @@ dispatch.on("generated", function (id_weight_string) {
         })
         .on("mouseout", function(d) {
             dispatch.unhighlight(d.data.id);
+        })
+        .on('click', function(d) {
+            dispatch.toggleFocus(d.data.id);
         });
 
     path.exit()
@@ -231,11 +245,15 @@ dispatch.on("highlight", function(prez_id) {
 
     donutChart.append('use')
         .style('pointer-events', 'none')
+        .classed('unfocused', true)
+        .attr('data-prez-id', prez_id)
         .attr('xlink:href','#slice-'+prez_id)
         .attr('transform', 'scale(0.85)');
 
     donutChart.append('use')
         .style('pointer-events', 'none')
+        .classed('unfocused', true)
+        .attr('data-prez-id', prez_id)
         .attr('xlink:href','#slice-'+prez_id)
         .attr('transform', 'scale(1.10)');
 
@@ -253,17 +271,40 @@ dispatch.on("unhighlight", function(prez_id) {
 
     // TODO: Remove color-highlight from spans with text from that prez
 
-    d3.selectAll('.sentence')
+    d3.selectAll('.sentence.unfocused')
             .classed('p'+prez_id, false);
 
     // TODO: Grow pie slice
 
-    donutChart.selectAll('use').remove();
+    donutChart.selectAll('use[data-prez-id="'+prez_id+'"].unfocused').remove();
     //d3.selectAll('path[data-slice="'+prez_id+'"]')
     //    .attr('transform', 'scale(1)');
 
 });
 
+dispatch.on("toggleFocus", function(prez_id) {
+
+    // if user clicked on element for current locked id
+    if (focusedPrezID == prez_id) {
+        // unfocus
+        d3.selectAll('[data-prez-id="'+prez_id+'"]')
+          .classed('unfocused', true)
+          .classed('focused', false);
+        focusedPrezID = null;
+    } else {
+        // focus 
+        if (focusedPrezID != null) {
+            d3.selectAll('[data-prez-id="'+focusedPrezID+'"]')
+              .classed('unfocused', true)
+              .classed('focused', false);
+            dispatch.unhighlight(focusedPrezID);
+        };
+        d3.selectAll('[data-prez-id="'+prez_id+'"]')
+          .classed('focused', true)
+          .classed('unfocused', false);
+        focusedPrezID = prez_id;
+    }
+});
 
 dispatch.generated(testIWS);
 
