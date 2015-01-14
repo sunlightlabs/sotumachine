@@ -6,6 +6,7 @@ window.dispatch = d3.dispatch("load", "generated", "highlight", "unhighlight");
 // DONUT CHART
 
 var presidents = {
+  "99": {"name": "Obama's pre-SOTU Tour"},
   "01": {"name": "George Washington"},
   "03": {"name": "Thomas Jefferson"},
   "40": {"name": "Ronald Reagan"},
@@ -16,6 +17,21 @@ var presidents = {
   "16": {"name": "Abraham Lincoln"},
   "26": {"name": "Theodore Roosevelt"}
 };
+
+
+    var prezFillColors = {  
+                        "99": "q0-10",
+                        "01": "q8-10",
+                        "03": "q9-10",
+                        "16": "q1-10",
+                        "26": "q2-10",
+                        "40": "q3-10",
+                        "41": "q4-10",
+                        "42": "q5-10",
+                        "43": "q6-10",
+                        "44": "q7-10"
+    };
+
 
 var tooltip = d3.select("body").append("div")
     .attr("class", "tooltip")
@@ -32,6 +48,7 @@ var parseIdWeightString = function(idWeightString){
                                                     });});
     parsedIdWeights.forEach(function(d) {
               d.id = d.id;
+              console.log(d.id);
               d.weight = +d.weight;
               d.name = presidents[d.id]['name'];
               // for reference in annotations, tooltips, etc
@@ -57,9 +74,10 @@ _.each( _.keys(presidents),
          color_classes.push('q' + i + '-' + _.keys(presidents).length);
             });
 
+
 var color = d3.scale.ordinal()
-        .range(color_classes)
-        .domain(_.keys(presidents));
+        .range(_.values(prezFillColors))
+        .domain(_.keys(prezFillColors));
 
 var arc = d3.svg.arc()
         .outerRadius(pieInnerRadius)
@@ -164,8 +182,6 @@ dispatch.on("generated", function (id_weight_string) {
     new_data = parseIdWeightString(id_weight_string);
 
     sentenceHighlighting();
-
-    testvar = new_data;
 
     firstPrezID = d3.select('.the-speech p:first-of-type span:first-of-type').attr('data-prez-id');
 

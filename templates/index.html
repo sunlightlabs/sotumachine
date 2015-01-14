@@ -24,7 +24,9 @@
 {% block ga %}UA-22821126-41{% endblock %}
 
 {% block css %}
-    <link rel="stylesheet" href="http://d36xyxqdggpeuw.cloudfront.net/static/screen.css"/>
+    <!--link rel="stylesheet" href="http://d36xyxqdggpeuw.cloudfront.net/static/screen.css"/-->
+    <link rel="stylesheet" href="/static/screen.css"/>
+
 {% endblock %}
 
 {% block container %}
@@ -33,6 +35,10 @@
                 <section class="settings">
                     <form role="form" id="president-form">
 
+                        <div class="form-group">
+                            <label for="">Obama's pre-SOTU tour</label>
+                            <input type="range" class="form-control slider" min="0" max="5" step="1" value="0" name="" id="slider-99" data-prez-id="99">
+                        </div>
                         <div class="form-group">
                             <label for="">Barack Obama</label>
                             <input type="range" class="form-control slider" min="0" max="5" step="1" value="0" name="" id="slider-44" data-prez-id="44">
@@ -187,7 +193,8 @@
     <script src="http://d36xyxqdggpeuw.cloudfront.net/static/respond.min.js"></script>
     <script src="http://d36xyxqdggpeuw.cloudfront.net/static/underscore-min.js"></script>
     <script src="http://d36xyxqdggpeuw.cloudfront.net/static/d3.v3.min.js"></script>
-    <script src="http://d36xyxqdggpeuw.cloudfront.net/static/donut_chart.js"></script>
+    <!-- script src="http://d36xyxqdggpeuw.cloudfront.net/static/donut_chart.js"></script-->
+    <script src="/static/donut_chart.js"></script>
     <script src="/static/application.js"></script>
 	<script src="https://s3.amazonaws.com/assets.sunlightfoundation.com/social/scripts/simple-socialite-pack.min.js"></script>
 	<script>

@@ -11,7 +11,9 @@ $(function (){
 
     // gradient for slider fill
 
-    var prezFillColors = {  "01": "#6BBBA1",
+    var prezFillColors = {  
+                        "99": "#A0A0A0",
+                        "01": "#6BBBA1",
                         "03": "#C8D7A1",
                         "16": "#F2DA57",
                         "26": "#F6B656",
@@ -19,7 +21,8 @@ $(function (){
                         "41": "#DCBDCF",
                         "42": "#B396AD",
                         "43": "#E58429",
-                        "44": "#B0CBDB"  }
+                        "44": "#B0CBDB"
+    }
 
 
     function fillSlider() {
