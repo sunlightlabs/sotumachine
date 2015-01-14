@@ -124,16 +124,16 @@ body {
     margin: 0 auto;
 }
 
-.prezColors .q0-10 { fill: #A0A0A0; background-color: #A0A0A0; }
-.prezColors .q1-10 { fill: #F2DA57; background-color: #F2DA57; }
-.prezColors .q2-10 { fill: #F6B656; background-color: #F6B656; }
-.prezColors .q3-10 { fill: #E25A42; background-color: #E25A42; }
-.prezColors .q4-10 { fill: #DCBDCF; background-color: #DCBDCF; }
-.prezColors .q5-10 { fill: #B396AD; background-color: #B396AD; }
-.prezColors .q6-10 { fill: #E58429; background-color: #E58429; }
-.prezColors .q7-10 { fill: #B0CBDB; background-color: #B0CBDB; }
-.prezColors .q8-10 { fill: #6BBBA1; background-color: #6BBBA1; }
-.prezColors .q9-10 { fill: #C8D7A1; background-color: #C8D7A1; }
+.prezColors .p01 { fill: #6BBBA1; background-color: #6BBBA1; }
+.prezColors .p03 { fill: #C8D7A1; background-color: #C8D7A1; }
+.prezColors .p16 { fill: #F2DA57; background-color: #F2DA57; }
+.prezColors .p26 { fill: #F6B656; background-color: #F6B656; }
+.prezColors .p40 { fill: #E25A42; background-color: #E25A42; }
+.prezColors .p41 { fill: #DCBDCF; background-color: #DCBDCF; }
+.prezColors .p42 { fill: #B396AD; background-color: #B396AD; }
+.prezColors .p43 { fill: #E58429; background-color: #E58429; }
+.prezColors .p44 { fill: #B0CBDB; background-color: #B0CBDB; }
+.prezColors .p99 { fill: #A0A0A0; background-color: #A0A0A0; }
 
 /* form and fancy schmancy range sliders */
 
