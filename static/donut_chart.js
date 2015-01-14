@@ -19,20 +19,6 @@ var presidents = {
 };
 
 
-    var prezFillColors = {  
-                        "99": "q0-10",
-                        "01": "q8-10",
-                        "03": "q9-10",
-                        "16": "q1-10",
-                        "26": "q2-10",
-                        "40": "q3-10",
-                        "41": "q4-10",
-                        "42": "q5-10",
-                        "43": "q6-10",
-                        "44": "q7-10"
-    };
-
-
 var tooltip = d3.select("body").append("div")
     .attr("class", "tooltip")
     .style("opacity", 0);
@@ -48,7 +34,6 @@ var parseIdWeightString = function(idWeightString){
                                                     });});
     parsedIdWeights.forEach(function(d) {
               d.id = d.id;
-              console.log(d.id);
               d.weight = +d.weight;
               d.name = presidents[d.id]['name'];
               // for reference in annotations, tooltips, etc
@@ -68,16 +53,6 @@ var width = parseInt(chartDiv.style("width")),
     pieOuterRadius = radius - 10,
     pictureRadius = radius - 40;
 
-var color_classes = [];
-_.each( _.keys(presidents),
-       function(e, i, ls) {
-         color_classes.push('q' + i + '-' + _.keys(presidents).length);
-            });
-
-
-var color = d3.scale.ordinal()
-        .range(_.values(prezFillColors))
-        .domain(_.keys(prezFillColors));
 
 var arc = d3.svg.arc()
         .outerRadius(pieInnerRadius)
@@ -196,7 +171,11 @@ dispatch.on("generated", function (id_weight_string) {
 
     path.enter().append("path")
         .each(function(d, i) { this._current = findNeighborArc(i, data0, data1, key) || d; })
-        .attr("class", function(d){ return color(d.data.id);})
+        .attr("class", function(d){ 
+            var c = "prezColors p"+d.data.id;
+            console.log(c);
+            return c;
+        })
         .attr("id", function(d){ return "slice-"+d.data.id; })
       //.append("title")
         //.text(function(d) { return d.data.id; })
@@ -239,10 +218,8 @@ dispatch.on("highlight", function(prez_id) {
 
     // TODO: Color-highlight spans with text from that prez
 
-    c = color(prez_id);
-
     d3.selectAll('.sentence')
-            .classed(c, function() {
+            .classed('p'+prez_id, function() {
                 pid = String(d3.select(this).attr("data-prez-id"));
                 if (pid == prez_id) {
                     return true;
@@ -276,10 +253,8 @@ dispatch.on("unhighlight", function(prez_id) {
 
     // TODO: Remove color-highlight from spans with text from that prez
 
-    c = color(prez_id);
-
     d3.selectAll('.sentence')
-            .classed(c, false);
+            .classed('p'+prez_id, false);
 
     // TODO: Grow pie slice
 
