@@ -87,7 +87,9 @@ var prezPicture = svg.append("g")
 
 var updatePicture = function(id) {
   var ext = (id == null) ? "png" : "jpg";
-  prezPicture.attr("xlink:href", "/static/"+id+"." + ext);
+  if (focusedPrezID == null) {
+      prezPicture.attr("xlink:href", "/static/"+id+"." + ext);
+  };
 };
 
 function key(d) {
@@ -288,6 +290,7 @@ dispatch.on("toggleFocus", function(prez_id) {
         d3.selectAll('[data-prez-id="'+prez_id+'"]')
           .classed('unfocused', true)
           .classed('focused', false);
+        focusedPrezID = null;
     } else {
         // focus 
         if (focusedPrezID != null) {
@@ -299,8 +302,8 @@ dispatch.on("toggleFocus", function(prez_id) {
         d3.selectAll('[data-prez-id="'+prez_id+'"]')
           .classed('focused', true)
           .classed('unfocused', false);
+        focusedPrezID = prez_id;
     }
-    focusedPrezID = prez_id;
 });
 
 dispatch.generated(testIWS);
