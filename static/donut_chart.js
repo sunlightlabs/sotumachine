@@ -52,7 +52,7 @@ var width = parseInt(chartDiv.style("width")),
     height = parseInt(chartDiv.style("height")),
     radius = Math.min(width, height) / 2,
     pieInnerRadius = radius - 30,
-    pieOuterRadius = radius - 10,
+    pieOuterRadius = radius - 20,
     pictureRadius = radius - 40;
 
 
@@ -182,7 +182,7 @@ dispatch.on("generated", function (id_weight_string) {
 
     path.enter().append("path")
         .each(function(d, i) { this._current = findNeighborArc(i, data0, data1, key) || d; })
-        .attr("class", function(d){ 
+        .attr("class", function(d){
             var c = "prezColors p"+d.data.id+" unfocused";
             console.log(c);
             return c;
@@ -248,14 +248,14 @@ dispatch.on("highlight", function(prez_id) {
         .classed('unfocused', true)
         .attr('data-prez-id', prez_id)
         .attr('xlink:href','#slice-'+prez_id)
-        .attr('transform', 'scale(0.85)');
+        .attr('transform', 'scale(0.95)');
 
     donutChart.append('use')
         .style('pointer-events', 'none')
         .classed('unfocused', true)
         .attr('data-prez-id', prez_id)
         .attr('xlink:href','#slice-'+prez_id)
-        .attr('transform', 'scale(1.10)');
+        .attr('transform', 'scale(1.05)');
 
 });
 
@@ -292,7 +292,7 @@ dispatch.on("toggleFocus", function(prez_id) {
           .classed('focused', false);
         focusedPrezID = null;
     } else {
-        // focus 
+        // focus
         if (focusedPrezID != null) {
             d3.selectAll('[data-prez-id="'+focusedPrezID+'"]')
               .classed('unfocused', true)
