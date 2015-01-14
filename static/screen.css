@@ -7,18 +7,14 @@ body {
     line-height: 1.75em;
 }
 
-.sf-header {
-    margin-bottom: 0;
+.branding-bar {
     position: fixed;
     width: 100%;
-    height: 45px;
-    z-index: 10;
+    height: 45px !important;
+    padding: 0;
+    margin-bottom: 0;
     top: 0;
-}
-
-.sf-header a.sf-logo {
-    margin-right: 15px;
-    margin-top: 7px;
+    z-index: 10;
 }
 
 .container-fluid #sidebar,
@@ -407,7 +403,7 @@ footer.active {
     padding: 4px 9px;
     font-family: "proxima-nova-condensed", sans-serif;
 }
-ul.social-follow{ 
+ul.social-follow{
     list-style-type: none;
     padding: 0;
 }
@@ -458,7 +454,7 @@ ul.social-follow{
 @media only screen
   and (min-device-width : 768px)
   and (max-device-width : 1024px)
-  and (orientation:landscape) 
+  and (orientation:landscape)
 {
     .slider::-webkit-slider-thumb { -webkit-appearance: none !important; border-radius: 50%; background-color: #fff; height: 20px; width: 20px; cursor: pointer; }
 
@@ -466,7 +462,7 @@ ul.social-follow{
 @media only screen
   and (min-device-width : 768px)
   and (max-device-width : 1024px)
-  and (orientation:portrait) 
+  and (orientation:portrait)
 {
     .slider::-webkit-slider-thumb { -webkit-appearance: none !important; border-radius: 50%; background-color: #fff; height: 20px; width: 20px; cursor: pointer; }
 
