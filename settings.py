@@ -28,4 +28,5 @@ SENTRY_DSN = os.environ.get('SENTRY_DSN')
 
 STATS_PATH = os.path.join(PROJECT_ROOT, 'data', 'stats.json')
 LANG_MODEL_DIR = os.path.join(PROJECT_ROOT, 'data', 'models')
+STUBS_DIR = os.path.join(PROJECT_ROOT, 'data', 'stubs')
 TEXT_DIR = os.path.join(PROJECT_ROOT, 'data', 'SOTU/sotu/text')
