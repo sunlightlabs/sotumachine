@@ -248,6 +248,7 @@ dispatch.on("highlight", function(prez_id) {
         .classed('unfocused', true)
         .attr('data-prez-id', prez_id)
         .attr('xlink:href','#slice-'+prez_id)
+        .transition()
         .attr('transform', 'scale(0.95)');
 
     donutChart.append('use')
@@ -255,6 +256,7 @@ dispatch.on("highlight", function(prez_id) {
         .classed('unfocused', true)
         .attr('data-prez-id', prez_id)
         .attr('xlink:href','#slice-'+prez_id)
+        .transition()
         .attr('transform', 'scale(1.05)');
 
 });
@@ -276,7 +278,7 @@ dispatch.on("unhighlight", function(prez_id) {
 
     // TODO: Grow pie slice
 
-    donutChart.selectAll('use[data-prez-id="'+prez_id+'"].unfocused').remove();
+    donutChart.selectAll('use[data-prez-id="'+prez_id+'"].unfocused').transition().attr('transform', 'scale(1)').remove();
     //d3.selectAll('path[data-slice="'+prez_id+'"]')
     //    .attr('transform', 'scale(1)');
 
