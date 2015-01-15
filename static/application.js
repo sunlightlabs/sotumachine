@@ -160,6 +160,7 @@ $(function (){
         ).then(function() {
             dispatch.generated(iws);
             $('')
+            $('span.sentence').selectionSharer();
         });
     };
     Speech.prototype.randomIWS = function() {
@@ -208,7 +209,10 @@ $(function (){
             //     speech.updateSliders(speech.iws);
             //     speech.createShareButtons();
             // })
-        ).then(function() { dispatch.generated(speech.iws); });
+        ).then(function() { 
+            dispatch.generated(speech.iws);     
+            $('span.sentence').selectionSharer();
+        });
 
     };
     Speech.prototype.updateSliders = function(iws) {
