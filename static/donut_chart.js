@@ -1,7 +1,9 @@
+var testvar;
+
 $(function (){
 // EVENT DISPATCHER
 
-window.dispatch = d3.dispatch("load", "generated", "highlight", "unhighlight", "toggleFocus");
+window.dispatch = d3.dispatch("load", "generated", "highlight", "unhighlight", "toggleFocus", "pieTooltip", "sentenceTooltip");
 
 // DONUT CHART
 
@@ -25,7 +27,6 @@ var tooltip = d3.select("body").append("div")
 
 var focusedPrezID = null;
 
-var testvar;
 
 var parseIdWeightString = function(idWeightString){
     var parsedIdWeights = [];
@@ -150,6 +151,7 @@ var sentenceHighlighting = function() {
             .on('mouseover', function(d) {
                 var prez_id = String(d3.select(this).attr('data-prez-id'));
                 dispatch.highlight(prez_id);
+                dispatch.sentenceTooltip(prez_id, d3.select(this));
             })
             .on('mouseout', function(d) {
                 var prez_id = String(d3.select(this).attr('data-prez-id'));
@@ -192,6 +194,7 @@ dispatch.on("generated", function (id_weight_string) {
         //.text(function(d) { return d.data.id; })
         .on("mouseover", function(d) {
             dispatch.highlight(d.data.id);
+            dispatch.pieTooltip(d.data.id);
         })
         .on("mouseout", function(d) {
             dispatch.unhighlight(d.data.id);
@@ -214,7 +217,34 @@ dispatch.on("generated", function (id_weight_string) {
 
 });
 
-dispatch.on("highlight", function(prez_id) {
+dispatch.on("sentenceTooltip", function(prez_id, sentence) {
+
+    sentenceNode = $(sentence)[0]
+    
+    var firstSpan = $('.the-speech p:first-of-type span:first-of-type');
+    
+    tooltip.transition()
+           .duration(200)
+           .style("opacity", .9);
+
+    var tooltipWidth = $($(tooltip)[0]).outerWidth(true);
+
+    var sentenceOffset = $(sentenceNode).offset()
+    var firstSpanOffset = $(firstSpan).offset()
+
+    var sentenceLeft = firstSpanOffset.left - (tooltipWidth + 10)
+    var sentenceTop = sentenceOffset.top
+
+    tooltip.html(  '<strong>'+ presidents[prez_id]['name']+'</strong>' + ":" +
+                   '<br>' +
+                   d3.round((presidents[prez_id]['weight']/weight_total) * 100) + "%")
+                .style("left", (sentenceLeft + "px"))
+                .style("top", (sentenceTop + "px"));
+
+});
+
+dispatch.on("pieTooltip", function(prez_id) {
+    // Make tooltip visible, put info into it and have it follow the cursor
     // Make tooltip visible, put info into it and have it follow the cursor
     tooltip.transition()
            .duration(200)
@@ -225,6 +255,9 @@ dispatch.on("highlight", function(prez_id) {
                    d3.round((presidents[prez_id]['weight']/weight_total) * 100) + "%")
                 .style("left", (d3.event.pageX) +7 + "px")
                 .style("top", (d3.event.pageY) + "px");
+});
+
+dispatch.on("highlight", function(prez_id) {
 
     // TODO: Change center picture to one of that prez
 
