@@ -1,3 +1,4 @@
+setuptools==9.1
 -e git+https://github.com/sunlightlabs/sfapp.git#egg=sfapp
 Flask==0.10.1
 Jinja2==2.7.2
