@@ -34,8 +34,9 @@ app.register_blueprint(sfapp)
 
 # Sentry configuration
 
-app.config['SENTRY_DSN'] = os.environ.get('SENTRY_DSN')
-sentry = Sentry(app)
+if 'SENTRY_DSN' in os.environ:
+    app.config['SENTRY_DSN'] = os.environ.get('SENTRY_DSN')
+    sentry = Sentry(app)
 
 
 #
