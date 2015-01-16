@@ -12,7 +12,7 @@ var presidents = {
   "01": {"name": "George Washington"},
   "03": {"name": "Thomas Jefferson"},
   "40": {"name": "Ronald Reagan"},
-  "41": {"name": "George Bush"},
+  "41": {"name": "George H. W. Bush"},
   "42": {"name": "William J. Clinton"},
   "43": {"name": "George W. Bush"},
   "44": {"name": "Barack Obama"},
