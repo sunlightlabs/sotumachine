@@ -7,6 +7,10 @@ body {
     line-height: 1.75em;
 }
 
+::selection {
+  background: #444;
+}
+
 .branding-bar {
     background: #d2dddd !important;
     position: fixed;
@@ -130,6 +134,25 @@ body {
     margin: 0 auto;
 }
 
+.sotu-chart-label {
+    background: rgba(0,0,0,.25);
+    padding: 3px 0 2px;
+    text-align: center;
+    border-radius: 3px;
+    height: 30px;
+    width: 100%;
+    font-size: 13px;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+}
+
+#sotu-chart g.prezColors {
+    cursor: pointer;
+}
+
+#president-form {
+    margin-bottom: 75px;
+}
 .prezColors .p01 { fill: #6BBBA1; background-color: #6BBBA1; }
 .prezColors .p03 { fill: #C8D7A1; background-color: #C8D7A1; }
 .prezColors .p16 { fill: #F2DA57; background-color: #F2DA57; }
@@ -190,30 +213,31 @@ body {
     opacity: .8;
     cursor: pointer;
 }
-.slider::-webkit-slider-thumb { -webkit-appearance: none !important; background-color: #fff; height: 13px; width: 6px; cursor: pointer; }
+.slider::-webkit-slider-thumb { -webkit-appearance: none !important; background-color: #fff; height: 13px; width: 5px; cursor: pointer; }
 
 .slider::-ms-fill-lower { background: #c9a706; }
 .slider::-ms-fill-upper { background: #333; }
-.slider::-ms-thumb { background: #fff;height: 13px;width: 6px; }
+.slider::-ms-thumb { background: #fff;height: 13px;width: 5px; }
 .slider::-ms-track { border: 0; }
 
-.slider::-moz-range-thumb { background: #fff; height: 13px; width: 6px; border-radius: 0; border: 0; }
+.slider::-moz-range-thumb { background: #fff; height: 13px; width: 5px; border-radius: 0; border: 0; }
 .slider::-moz-range-track { border: 0; background: transparent; }
 
-div.tooltip {
+.tooltip {
     position: absolute;
     text-align: center;
-    padding: 10px 2px 10px 2px;
+    padding: 10px 5px 10px 5px;
     width: 120px;
     height: auto;
-    font: 300 14px "prenton-condensed", "franklin-gothic-urw-cond", 'Yanone Kaffeesatz',"Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    font: 300 12px "prenton-condensed", "franklin-gothic-urw-cond", 'Yanone Kaffeesatz',"Helvetica Neue", "Helvetica", "Arial", sans-serif;
     background: #edeff1;
     border: 1px solid #B4B7B8;
-    /*border-radius*/
-    -webkit-border-radius: 1px;
-       -moz-border-radius: 1px;
-            border-radius: 1px;
+    border-radius: 2px;
     pointer-events: none;
+}
+.tooltip strong {
+    margin-bottom: 5px;
+    display: inline-block;
 }
 
 /* sotu speech */
@@ -223,7 +247,7 @@ main {
     padding: 0 15px;
 }
 .sentence {
-    padding: 5px;
+    padding-top: 5px;
 }
 .sotu-header {
     padding-bottom: 1em;

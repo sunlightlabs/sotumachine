@@ -3,7 +3,7 @@ var testvar;
 $(function (){
 // EVENT DISPATCHER
 
-window.dispatch = d3.dispatch("load", "generated", "highlight", "unhighlight", "toggleFocus", "pieTooltip", "sentenceTooltip");
+window.dispatch = d3.dispatch("load", "generated", "highlight", "unhighlight", "toggleFocus", "sentenceTooltip");
 
 // DONUT CHART
 
@@ -24,6 +24,8 @@ var presidents = {
 var tooltip = d3.select("body").append("div")
     .attr("class", "tooltip")
     .style("opacity", 0);
+
+var pieChartLabel = $('.sotu-chart-label');
 
 var focusedPrezID = null;
 
@@ -90,8 +92,20 @@ var updatePicture = function(id) {
   var ext = (id == null) ? "png" : "jpg";
   if (focusedPrezID == null || id == focusedPrezID) {
       prezPicture.attr("xlink:href", "/static/"+id+"." + ext);
-  };
+  }
 };
+
+var updateLabel = function(id) {
+  if (focusedPrezID == null || id == focusedPrezID) {
+    if (id) {
+      var name = presidents[id]['name'];
+      var percentage = d3.round((presidents[id]['weight']/weight_total) * 100) + "%";
+      pieChartLabel.html(name + " &mdash; " + percentage);
+    } else {
+      pieChartLabel.text('CONTRIBUTOR BREAKDOWN');
+    }
+  }
+}
 
 function key(d) {
   return d.data.id;
@@ -161,6 +175,7 @@ var sentenceHighlighting = function() {
                 var prez_id = String(d3.select(this).attr('data-prez-id'));
                 dispatch.highlight(prez_id);
                 dispatch.toggleFocus(prez_id);
+                updateLabel(prez_id);
             })
             ;
 };
@@ -176,6 +191,7 @@ dispatch.on("generated", function (id_weight_string) {
     weight_total = d3.sum(new_data, function(d){ return d.weight; });
 
     updatePicture(firstPrezID);
+    updateLabel();
 
     var data0 = path.data(),
         data1 = pie(new_data);
@@ -194,7 +210,6 @@ dispatch.on("generated", function (id_weight_string) {
         //.text(function(d) { return d.data.id; })
         .on("mouseover", function(d) {
             dispatch.highlight(d.data.id);
-            dispatch.pieTooltip(d.data.id);
         })
         .on("mouseout", function(d) {
             dispatch.unhighlight(d.data.id);
@@ -235,7 +250,7 @@ dispatch.on("sentenceTooltip", function(prez_id, sentence) {
     var sentenceLeft = firstSpanOffset.left - (tooltipWidth + 10)
     var sentenceTop = sentenceOffset.top
 
-    tooltip.html(  '<strong>'+ presidents[prez_id]['name']+'</strong>' + ":" +
+    tooltip.html(  '<strong>'+ presidents[prez_id]['name']+'</strong>' +
                    '<br>' +
                    d3.round((presidents[prez_id]['weight']/weight_total) * 100) + "%")
                 .style("left", (sentenceLeft + "px"))
@@ -243,25 +258,12 @@ dispatch.on("sentenceTooltip", function(prez_id, sentence) {
 
 });
 
-dispatch.on("pieTooltip", function(prez_id) {
-    // Make tooltip visible, put info into it and have it follow the cursor
-    // Make tooltip visible, put info into it and have it follow the cursor
-    tooltip.transition()
-           .duration(200)
-           .style("opacity", .9);
-
-    tooltip.html(  '<strong>'+ presidents[prez_id]['name']+'</strong>' + ":" +
-                   '<br>' +
-                   d3.round((presidents[prez_id]['weight']/weight_total) * 100) + "%")
-                .style("left", (d3.event.pageX) +7 + "px")
-                .style("top", (d3.event.pageY) + "px");
-});
-
 dispatch.on("highlight", function(prez_id) {
 
     // TODO: Change center picture to one of that prez
 
     updatePicture(prez_id);
+    updateLabel(prez_id);
 
     // TODO: Color-highlight spans with text from that prez
 
@@ -303,6 +305,7 @@ dispatch.on("unhighlight", function(prez_id) {
     // TODO: Change center picture back to firstPrez
 
     updatePicture(firstPrezID);
+    updateLabel();
 
     // TODO: Remove color-highlight from spans with text from that prez
 
@@ -339,6 +342,7 @@ dispatch.on("toggleFocus", function(prez_id) {
           .classed('unfocused', false);
         focusedPrezID = prez_id;
         updatePicture(prez_id);
+        updateLabel(prez_id);
     }
 });
 
