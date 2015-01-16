@@ -4,6 +4,8 @@ import urlparse
 
 PROJECT_ROOT = os.path.realpath(os.path.dirname(__file__))
 
+STATIC_HOST = os.environ.get('STATIC_HOST', 'http://sotu.sunlightfoundation.com')
+
 
 # Redis
 

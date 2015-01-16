@@ -64,7 +64,8 @@ if not app.config['DEBUG']:
 
 @app.route('/', methods=['GET'])
 def index():
-    return render_template('index.html')
+    context = {'static_host': settings.STATIC_HOST}
+    return render_template('index.html', **context)
 
 @app.route('/generate', methods=['GET'])
 def generate_speech():
@@ -99,7 +100,8 @@ def speech_proxy(speech_id):
         resp = requests.get(url)
         return Response(resp.content, mimetype='application/json')
     else:
-        return render_template('index.html')
+        context = {'static_host': settings.STATIC_HOST}
+        return render_template('index.html', **context)
 
 
 if __name__ == '__main__':
