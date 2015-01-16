@@ -16,32 +16,57 @@ def parse_weight_string(ws):
         yield (ws[i:i+2], int(ws[i+2]))
 
 def retokenize(output_list):
-    output_string = output_list[0].title()
-    for word in output_list[1:]:
-        add_string = ''
-        previous_char = output_string[-1]
-        pre_space = True
-        if word == '~SENT~':
-            continue
-        elif previous_char == '$':
-            pre_space = False
-        elif word.isalnum():
+    try:
+        balance_quote = False
+        output_string = output_list[0].title()
+        for position, word in enumerate(output_list[1:]):
+            add_string = ''
+            previous_char = output_string[-1]
             pre_space = True
-        elif word in ['Dr.', 'Mr.', 'Mrs.', 'M.', '$']:
-            pre_space = True
-        elif (word[0].isalnum()) and (word[-1].isalnum()) and (('-' in word) or ('.' in word)or (',' in word)):
-            pre_space = True
-        elif word[:-1].isalpha():
-            pre_space = True
-        elif not previous_char.isalnum():
-            pre_space = True
-        else:
-            pre_space = False
+            
+            if word == '~SENT~':
+                continue
+            elif u"\u0060\u0060" in word.encode('utf8'):
+                word = '"'
+                pre_space = True
+                balance_quote = True
+            elif "''" in word:
+                if balance_quote:
+                    word = '"'
+                    pre_space = False
+                    balance_quote = False
+                else:
+                    continue
+            elif previous_char == '$':
+                pre_space = False
+            elif previous_char == '"':
+                if output_string[-2] != " ":
+                    pre_space = True
+                else:
+                    pre_space = False
+            elif word.isalnum():
+                pre_space = True
+            elif word in ['Dr.', 'Mr.', 'Mrs.', 'M.', '$']:
+                pre_space = True
+            elif (word[0].isalnum()) and (word[-1].isalnum()) and (('-' in word) or ('.' in word)or (',' in word)):
+                pre_space = True
+            elif word[:-1].isalpha():
+                pre_space = True
+            elif not previous_char.isalnum():
+                pre_space = True
+            else:
+                pre_space = False
 
-        if pre_space:
-            add_string += ' '
-        add_string += word
-        output_string += add_string
+            if pre_space:
+                add_string += ' '
+
+            add_string += word
+            output_string += add_string
+        if balance_quote:
+            output_string += '"'
+    except UnicodeDecodeError:
+        new_list = [w.decode('latin1').encode('utf8') for w in output_list]
+        retokenize(new_list)
     return output_string.replace('& mdash;','')
 
 def get_random_id_weight_string(statistics):
