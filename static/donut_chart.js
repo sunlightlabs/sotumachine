@@ -235,7 +235,7 @@ dispatch.on("sentenceTooltip", function(prez_id, sentence) {
     var sentenceLeft = firstSpanOffset.left - (tooltipWidth + 10)
     var sentenceTop = sentenceOffset.top
 
-    tooltip.html(  '<strong>'+ presidents[prez_id]['name']+'</strong>' + ":" +
+    tooltip.html(  '<strong>'+ presidents[prez_id]['name']+'</strong>' +
                    '<br>' +
                    d3.round((presidents[prez_id]['weight']/weight_total) * 100) + "%")
                 .style("left", (sentenceLeft + "px"))
@@ -250,7 +250,7 @@ dispatch.on("pieTooltip", function(prez_id) {
            .duration(200)
            .style("opacity", .9);
 
-    tooltip.html(  '<strong>'+ presidents[prez_id]['name']+'</strong>' + ":" +
+    tooltip.html(  '<strong>'+ presidents[prez_id]['name']+'</strong>' +
                    '<br>' +
                    d3.round((presidents[prez_id]['weight']/weight_total) * 100) + "%")
                 .style("left", (d3.event.pageX) +7 + "px")
