@@ -176,6 +176,8 @@ class SpeechWriter(object):
                 yield self.generate_paragraph(i, citations)
             except UnicodeDecodeError:
                 continue
+            except IndexError:
+                yield ''
 
     def generate_paragraph(self, graf_num, citations):
         paragraph = []
