@@ -160,7 +160,7 @@ $(function (){
         ).then(function() {
             dispatch.generated(iws);
             $('')
-            $('span.sentence').selectionSharer();
+            $('div.the-speech-content').selectionSharer();
         });
     };
     Speech.prototype.randomIWS = function() {
