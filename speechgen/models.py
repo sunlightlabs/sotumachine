@@ -172,7 +172,10 @@ class SpeechWriter(object):
 
         for i in xrange(int(15)):
             #great place to parallelize
-            yield self.generate_paragraph(i, citations)
+            try:
+                yield self.generate_paragraph(i, citations)
+            except UnicodeDecodeError:
+                continue
 
     def generate_paragraph(self, graf_num, citations):
         paragraph = []
