@@ -167,7 +167,6 @@ body {
 /* form and fancy schmancy range sliders */
 
 .form-control { background-color: #434c51; }
-/*.form-group {margin-bottom: 12px; }*/
 
 .settings form .settings-title {
     color: #fff;
@@ -246,54 +245,41 @@ main {
     margin-left: 300px;
     padding: 0 15px;
 }
-.sentence {
-    padding-top: 5px;
-}
-.sotu-header {
+
+.sotu-intro {
+    padding-top: 50px;
     padding-bottom: 1em;
     margin-bottom: 3em;
-    border-bottom: 4px double #ccc;
+    border-bottom: 1px dashed #ccc;
 }
-.sotu-header .title {
-    float: left;
-}
-.sotu-machine-header {
-    margin-bottom: 1em;
-}
+
 .sotu-logo {
-    background-position: 0 149px;
-    margin: .5em;
-    background: url(/static/sotumachine-logo.png) center 0px no-repeat;
-    width: 175px;
+    min-width: 175px;
     height: 105px;
-    background-size: cover;
-    text-indent: -9999em;
-    float: left;
-    margin-bottom: 80px;
-    transition: -webkit-transform 150ms ease-out;
-    transition: -ms-transform 150ms ease-out;
-    transition: -moz-transform 150ms ease-out;
+    padding: 0;
 }
-.sotu-logo:hover {
-    background: url(/static/sotumachine-logo.png) center -106px no-repeat;
-    background-size: cover;
-    -webkit-transform: rotate(12deg);
-    -ms-transform: rotate(12deg);
-    -moz-transform: rotate(12deg);
-}
-.sotu-header p{
-    font-style: italic;
-    font-size: 80%;
+
+.sotu-intro-text {
+    font-family: "proxima-nova-condensed", sans-serif;
+    font-size: 14px;
+    line-height: 18px;
     color: #666;
     margin-top: 27px;
     margin-bottom: 40px;
 }
+
 .the-speech {
     font-family: "ff-meta-serif-web-pro", serif;
     font-size: 1.4em;
     line-height: 1.75em;
     color: #333;
     padding: 2em;
+}
+
+.sotu-header {
+    padding-bottom: 1em;
+    margin-bottom: 3em;
+    border-bottom: 4px double #ccc;
 }
 
 .the-speech h2 {
@@ -522,14 +508,7 @@ ul.social-follow{
     .hidden-sm-footer { display: none; }
 }
 
-@media (max-width: 1100px) {
-    .sotu-header p{
-        float: none;
-        clear: both;
-        font-size: 70%;
-    }
-    .sotu-logo {
-        margin: 0 auto 0px auto;
-        float: none;
-    }
+@media (max-width: 790px) {
+    .sotu-logo { width: 100%; }
+    .sotu-intro-text { width: 100%; }
 }
